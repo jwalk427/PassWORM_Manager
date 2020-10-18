@@ -3,20 +3,20 @@ package model;
 import java.nio.charset.StandardCharsets;
 
 import javax.crypto.Cipher;
+import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 
 public class Password {
     private Cipher cipher;
-    private String key;
     private SecretKey secretKey;
-    
-    public byte[] pword;
+    private KeyGenerator keyGen;
+    private byte[] pword;
 
     public Password(String password) throws Exception {
         cipher = Cipher.getInstance("AES");
-        key = "1234567890123456";
-        secretKey = new SecretKeySpec(key.getBytes(), "AES");
+        keyGen = KeyGenerator.getInstance("AES");
+        keyGen.init(256);
+        secretKey = keyGen.generateKey();
         pword = encrypt(password);
     }
 
@@ -26,18 +26,18 @@ public class Password {
         return encrypted;
     }
 
-    public String decrypt(byte[] password) throws Exception {
+    public String decrypt() throws Exception {
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        String decrypted = new String(cipher.doFinal(password), StandardCharsets.UTF_8);
+        String decrypted = new String(cipher.doFinal(this.pword), StandardCharsets.UTF_8);
         return decrypted;
     }
 
+    /*Main class for testing and debugging*/
     // public static void main(String[] args) throws Exception 
     // { 
     //     Password password = new Password("thisispassword");
     //     System.out.println("thisispassword");
     //     System.out.println(password.pword);
     //     System.out.println(password.decrypt(password.pword));
-
     // } 
 }
