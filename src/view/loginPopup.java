@@ -34,7 +34,7 @@ public class loginPopup extends javax.swing.JDialog {
         String passtxt = String.valueOf(txtPassword.getPassword());
         
         String code = MFA.generateCode();
-        MFA.sendEmail(code);
+        //MFA.sendEmail(code);
 
         if(usertxt.equalsIgnoreCase("") && passtxt.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Username or password still empty.");
