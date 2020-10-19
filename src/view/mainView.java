@@ -37,7 +37,7 @@ public final class mainView extends javax.swing.JFrame {
         menuSignup.setEnabled(!b);
         menuLogin.setEnabled(b);
         menuLogout.setEnabled(false);
-        menuAddEntry.setEnabled(b);
+        menuAddEntry.setEnabled(false);
         menuMaster2.setEnabled(b);
 
         if (!b) {
