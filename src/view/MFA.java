@@ -46,8 +46,6 @@ public class MFA {
      final String username = "passwormmanager@gmail.com";//
      final String password = "bigolworms";
 
-      int code= 99999;
-
       // Get the default Session object.
       Session session = Session.getDefaultInstance(props,new Authenticator(){
          protected PasswordAuthentication getPasswordAuthentication() {
