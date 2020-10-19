@@ -28,10 +28,21 @@ public final class mainView extends javax.swing.JFrame {
     public mainView() {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
-        isLoggin(false);
+        //set to true if an account exists
+        isSignup(false);
+    }
+
+    //Do not show signup if user has an account
+    public void isSignup(boolean b){
+        menuSignup.setEnabled(!b);
+        menuLogin.setEnabled(b);
+        menuLogout.setEnabled(false);
+        menuMaster1.setEnabled(b);
+        menuMaster2.setEnabled(b);
     }
 
     public void isLoggin(boolean b) {
+        menuSignup.setEnabled(false);
         menuLogin.setEnabled(!b);
         menuLogout.setEnabled(b);
         menuMaster1.setEnabled(b);
@@ -72,6 +83,7 @@ public final class mainView extends javax.swing.JFrame {
         txtLoginAs = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuFile = new javax.swing.JMenu();
+        menuSignup = new javax.swing.JMenuItem();
         menuLogin = new javax.swing.JMenuItem();
         menuLogout = new javax.swing.JMenuItem();
         menuMaster = new javax.swing.JMenu();
@@ -79,7 +91,7 @@ public final class mainView extends javax.swing.JFrame {
         menuMaster2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Simple Application Template by Mazipan - mazipanneh@gmail.com - mazipanneh.wordpress.com");
+        setTitle("PassWORM Manager");
 
         desktopPane.setAutoscrolls(true);
         desktopPane.setName(""); // NOI18N
@@ -129,6 +141,14 @@ public final class mainView extends javax.swing.JFrame {
 
         menuFile.setText("File");
 
+        menuSignup.setText("Sign Up");
+        menuSignup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSignupActionPerformed(evt);
+            }
+        });
+        menuFile.add(menuSignup);
+
         menuLogin.setText("Login");
         menuLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -171,6 +191,12 @@ public final class mainView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menuSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
+        // TODO add your handling code here:
+        signupPopup signupPopups = new signupPopup(null, true, this);
+        signupPopups.setVisible(true);
+    }//GEN-LAST:event_menuLoginActionPerformed
 
     private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoutActionPerformed
         // TODO add your handling code here:
@@ -287,6 +313,7 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu menuFile;
+    private javax.swing.JMenuItem menuSignup;
     private javax.swing.JMenuItem menuLogin;
     private javax.swing.JMenuItem menuLogout;
     private javax.swing.JMenu menuMaster;

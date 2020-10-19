@@ -29,14 +29,15 @@ public class signupPopup extends javax.swing.JDialog {
         txtPassword.setText("password");
     }
 
-    private void loggedIn(){
+    private void signedUp(){
         String usertxt = txtUsername.getText();
+        String emailtxt = txtEmail.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
         
-        if(usertxt.equalsIgnoreCase("") && passtxt.equalsIgnoreCase("")){
+        if(usertxt.equalsIgnoreCase("") || emailtxt.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Username or password still empty.");
-        }else if(usertxt.equals("admin") && passtxt.equals("admin")){
-            mainViews.isLoggin(true);
+        }else{
+            mainViews.isSignup(true);
             mainViews.getUserLabel().setText(usertxt);
             this.dispose();
         }
@@ -52,17 +53,19 @@ public class signupPopup extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
-        btnCancelLogin = new javax.swing.JButton();
+        btnSignUp = new javax.swing.JButton();
+        btnCancelSignUp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Login Form");
+        setTitle("Sign Up Form");
 
         jLabel1.setText("Username :");
+
+        jLabel3.setText("Email :");
 
         jLabel2.setText("Password :");
 
@@ -72,19 +75,17 @@ public class signupPopup extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("*) default username : admin pass: admin");
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnSignUp.setText("Sign Up");
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnSignUpActionPerformed(evt);
             }
         });
 
-        btnCancelLogin.setText("Cancel");
-        btnCancelLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelSignUp.setText("Cancel");
+        btnCancelSignUp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelLoginActionPerformed(evt);
+                btnCancelSignUpActionPerformed(evt);
             }
         });
 
@@ -101,17 +102,21 @@ public class signupPopup extends javax.swing.JDialog {
                         .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 20, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogin)
+                .addComponent(btnSignUp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelLogin)
+                .addComponent(btnCancelSignUp)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -123,39 +128,42 @@ public class signupPopup extends javax.swing.JDialog {
                     .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin)
-                    .addComponent(btnCancelLogin))
+                    .addComponent(btnSignUp)
+                    .addComponent(btnCancelSignUp))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelLoginActionPerformed
+    private void btnCancelSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelSignUpActionPerformed
         // TODO add your handling code here:
         txtPassword.setText("");
         txtEmail.setText("");
         txtUsername.setText("");
         this.dispose();
-    }//GEN-LAST:event_btnCancelLoginActionPerformed
+    }//GEN-LAST:event_btnCancelSignUpActionPerformed
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
         
-       loggedIn();
+       signedUp();
         
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }//GEN-LAST:event_btnSignUpActionPerformed
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
          if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            loggedIn();
+            signedUp();
         }
     }//GEN-LAST:event_txtPasswordKeyPressed
 
@@ -202,8 +210,8 @@ public class signupPopup extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelLogin;
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnCancelSignUp;
+    private javax.swing.JButton btnSignUp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
