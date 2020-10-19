@@ -147,16 +147,16 @@ public final class mainView extends javax.swing.JFrame {
 
         jMenuBar1.add(menuFile);
 
-        menuMaster.setText("Master");
-
-        menuMaster1.setText("Master Sample 1");
+        menuMaster.setText("Edit");
+/*
+        menuMaster1.setText("");
         menuMaster1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuMaster1ActionPerformed(evt);
             }
         });
         menuMaster.add(menuMaster1);
-
+ 
         menuMaster2.setText("Master Simple 2");
         menuMaster2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,7 +164,7 @@ public final class mainView extends javax.swing.JFrame {
             }
         });
         menuMaster.add(menuMaster2);
-
+*/
         jMenuBar1.add(menuMaster);
 
         setJMenuBar(jMenuBar1);
