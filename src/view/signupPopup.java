@@ -39,7 +39,6 @@ public class signupPopup extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Username or password still empty.");
         }else{
             mainViews.isSignup(true);
-            mainViews.getUserLabel().setText(usertxt);
             this.dispose();
         }
     }
