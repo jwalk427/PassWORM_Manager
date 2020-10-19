@@ -34,6 +34,7 @@ public class signupPopup extends javax.swing.JDialog {
         String emailtxt = txtEmail.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
         
+        //Add extra password, output message if they are not the same
         if(usertxt.equalsIgnoreCase("") || emailtxt.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Username or password still empty.");
         }else{

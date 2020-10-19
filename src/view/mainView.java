@@ -39,6 +39,11 @@ public final class mainView extends javax.swing.JFrame {
         menuLogout.setEnabled(false);
         menuMaster1.setEnabled(b);
         menuMaster2.setEnabled(b);
+
+        if (!b) {
+            txtLoginAs.setText("you must sign in first.");
+            userLabel.setText("");
+        } 
     }
 
     public void isLoggin(boolean b) {
