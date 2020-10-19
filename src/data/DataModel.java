@@ -1,10 +1,12 @@
 package data;
 
+import model.User;
+
 public class DataModel {
 
     private static DataModel INSTANCE;
 
-    private Account account = new Account();
+    private User user = null;
     private String fileName = null;
     private boolean modified = false;
 
@@ -19,12 +21,12 @@ public class DataModel {
         return INSTANCE;
     }
 
-    public final Account getAccount() {
-        return this.account;
+    public final User getUser() {
+        return this.user;
     }
 
-    public final void setAccount(final Account account) {
-        this.account = account;
+    public final void setUser(final User user) {
+        this.user = user;
     }
 
     public final String getFileName() {
@@ -44,7 +46,7 @@ public class DataModel {
     }
 
     public final void clear() {
-        this.account = new Account();
+        this.user = null;
         this.fileName = null;
         this.modified = false;
     }

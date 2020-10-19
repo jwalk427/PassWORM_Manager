@@ -14,6 +14,13 @@ public class User {
         pwordMap = new PasswordMap();
     }
 
+    public User() throws Exception {
+        userName = "default";
+        email = "default@email.com";
+        pword = new Password("default");
+        pwordMap = new PasswordMap();
+    }
+
     public String getUserName(){
         return userName;
     }
