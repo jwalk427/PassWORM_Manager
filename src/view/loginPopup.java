@@ -6,6 +6,7 @@
 
 package view;
 
+import view.MFA;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
