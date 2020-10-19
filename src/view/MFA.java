@@ -22,7 +22,7 @@ public class MFA {
       return ret;
    }
 
-   public void sendEmail() {    
+   public static void sendEmail(String code) {    
       // Recipient's email ID needs to be mentioned.
       String to = "hansooms14@yahoo.com";
 
