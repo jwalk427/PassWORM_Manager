@@ -37,7 +37,7 @@ public final class mainView extends javax.swing.JFrame {
         menuSignup.setEnabled(!b);
         menuLogin.setEnabled(b);
         menuLogout.setEnabled(false);
-        menuMaster1.setEnabled(b);
+        menuAddEntry.setEnabled(b);
         menuMaster2.setEnabled(b);
     }
 
@@ -45,7 +45,7 @@ public final class mainView extends javax.swing.JFrame {
         menuSignup.setEnabled(false);
         menuLogin.setEnabled(!b);
         menuLogout.setEnabled(b);
-        menuMaster1.setEnabled(b);
+        menuAddEntry.setEnabled(b);
         menuMaster2.setEnabled(b);
 
         if (b) {
@@ -86,8 +86,8 @@ public final class mainView extends javax.swing.JFrame {
         menuSignup = new javax.swing.JMenuItem();
         menuLogin = new javax.swing.JMenuItem();
         menuLogout = new javax.swing.JMenuItem();
-        menuMaster = new javax.swing.JMenu();
-        menuMaster1 = new javax.swing.JMenuItem();
+        menuEdit = new javax.swing.JMenu();
+        menuAddEntry = new javax.swing.JMenuItem();
         menuMaster2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -167,7 +167,15 @@ public final class mainView extends javax.swing.JFrame {
 
         jMenuBar1.add(menuFile);
 
-        menuMaster.setText("Edit");
+        menuEdit.setText("Edit");
+        menuAddEntry.setText("Add Entry");
+        menuAddEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAddEntryActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuAddEntry);
+        
 /*
         menuMaster1.setText("");
         menuMaster1.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +193,7 @@ public final class mainView extends javax.swing.JFrame {
         });
         menuMaster.add(menuMaster2);
 */
-        jMenuBar1.add(menuMaster);
+        jMenuBar1.add(menuEdit);
 
         setJMenuBar(jMenuBar1);
 
@@ -196,6 +204,12 @@ public final class mainView extends javax.swing.JFrame {
         // TODO add your handling code here:
         signupPopup signupPopups = new signupPopup(null, true, this);
         signupPopups.setVisible(true);
+    }//GEN-LAST:event_menuLoginActionPerformed
+
+    private void menuAddEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
+        // TODO add your handling code here:
+        addEntryPopup addEntryPopups = new addEntryPopup(null, true, this);
+        addEntryPopups.setVisible(true);
     }//GEN-LAST:event_menuLoginActionPerformed
 
     private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoutActionPerformed
@@ -316,8 +330,8 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuSignup;
     private javax.swing.JMenuItem menuLogin;
     private javax.swing.JMenuItem menuLogout;
-    private javax.swing.JMenu menuMaster;
-    private javax.swing.JMenuItem menuMaster1;
+    private javax.swing.JMenu menuEdit;
+    private javax.swing.JMenuItem menuAddEntry;
     private javax.swing.JMenuItem menuMaster2;
     private javax.swing.JLabel txtLoginAs;
     private javax.swing.JLabel userLabel;
