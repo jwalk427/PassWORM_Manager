@@ -3,11 +3,14 @@ package controller;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Author: Michael Rizzoni
+ */
 public class PasswordGenerator {
 
-    final int DEFAULT_LENGTH = 15;
-    final char[] SPECIALS = {'\\', '/', '(', ')', '?', '*', '&', '^', '%', '$', '#', '@', '!', ';', ':', '-', '+', '=', '_'};
-    final Random RANDOM = new Random();
+    static final int DEFAULT_LENGTH = 15;
+    static final char[] SPECIALS = {'\\', '/', '(', ')', '?', '*', '&', '^', '%', '$', '#', '@', '!', ';', ':', '-', '+', '=', '_'};
+    static final Random RANDOM = new Random();
 
     int length;
     boolean hasUpper;
@@ -16,7 +19,7 @@ public class PasswordGenerator {
     ArrayList<Character> symbols;
 
     public PasswordGenerator() {
-        this.length = 10;
+        this.length = DEFAULT_LENGTH;
         this.hasUpper = true;
         this.hasSpecial = false;
         this.hasNum = true;
@@ -38,7 +41,7 @@ public class PasswordGenerator {
         String pass = "";
 
         for(int i = 0; i < this.length; i++) {
-            pass += this.symbols.get(this.RANDOM.nextInt(this.symbols.size()));
+            pass += this.symbols.get(RANDOM.nextInt(this.symbols.size()));
         }
 
         return pass;
@@ -56,8 +59,8 @@ public class PasswordGenerator {
         }
 
         if(this.hasSpecial) {
-            for(int i = 0; i < this.SPECIALS.length; i++) {
-                this.symbols.add(this.SPECIALS[i]);
+            for(int i = 0; i < SPECIALS.length; i++) {
+                this.symbols.add(SPECIALS[i]);
             }
         }
 
@@ -68,5 +71,5 @@ public class PasswordGenerator {
         }
 
     }
-
+    
 }
