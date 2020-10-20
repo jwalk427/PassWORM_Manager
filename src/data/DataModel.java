@@ -37,11 +37,11 @@ public class DataModel {
         this.fileName = fileName;
     }
 
-    private final boolean isModified() {
+    public final boolean isModified() {
         return this.modified;
     }
 
-    private final void setModified(final boolean modified) {
+    public final void setModified(final boolean modified) {
         this.modified = modified;
     }
 
