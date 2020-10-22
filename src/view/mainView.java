@@ -38,6 +38,10 @@ public final class mainView extends javax.swing.JFrame {
         menuLogin.setEnabled(b);
         menuLogout.setEnabled(false);
         menuAddEntry.setEnabled(false);
+        menuEditEntry.setEnabled(false);
+        menuDeleteEntry.setEnabled(false);
+        menuViewEntries.setEnabled(false);
+        menuFindEntry.setEnabled(false);
         menuMaster2.setEnabled(b);
 
         if (!b) {
@@ -55,6 +59,11 @@ public final class mainView extends javax.swing.JFrame {
         menuLogin.setEnabled(!b);
         menuLogout.setEnabled(b);
         menuAddEntry.setEnabled(b);
+        // Enabled for testing purposes only (only allowed if an entry exists)
+        menuEditEntry.setEnabled(b);
+        menuDeleteEntry.setEnabled(b);
+        menuViewEntries.setEnabled(b);
+        menuFindEntry.setEnabled(b);
         menuMaster2.setEnabled(b);
 
         if (b) {
@@ -97,6 +106,10 @@ public final class mainView extends javax.swing.JFrame {
         menuLogout = new javax.swing.JMenuItem();
         menuEdit = new javax.swing.JMenu();
         menuAddEntry = new javax.swing.JMenuItem();
+        menuEditEntry = new javax.swing.JMenuItem();
+        menuDeleteEntry = new javax.swing.JMenuItem();
+        menuFindEntry = new javax.swing.JMenuItem();
+        menuViewEntries = new javax.swing.JMenuItem();
         menuMaster2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,7 +136,7 @@ public final class mainView extends javax.swing.JFrame {
 
         userLabel.setText("user");
 
-        txtLoginAs.setText("login as :");
+        txtLoginAs.setText("logged in as :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,6 +197,34 @@ public final class mainView extends javax.swing.JFrame {
             }
         });
         menuEdit.add(menuAddEntry);
+        menuEditEntry.setText("Edit Entry");
+        menuEditEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEditEntryActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuEditEntry);
+        menuDeleteEntry.setText("Delete Entry");
+        menuDeleteEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDeleteEntryActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuDeleteEntry);
+        menuFindEntry.setText("Find Entry");
+        menuFindEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFindEntryActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuFindEntry);
+        menuViewEntries.setText("View Entries");
+        menuViewEntries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuViewEntriesActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuViewEntries);
         
 /*
         menuMaster1.setText("");
@@ -209,28 +250,49 @@ public final class mainView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
-        // TODO add your handling code here:
+    private void menuSignupActionPerformed(java.awt.event.ActionEvent evt) {
         signupPopup signupPopups = new signupPopup(null, true, this);
         signupPopups.setVisible(true);
-    }//GEN-LAST:event_menuLoginActionPerformed
+    }
 
-    private void menuAddEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
-        // TODO add your handling code here:
+    private void menuAddEntryActionPerformed(java.awt.event.ActionEvent evt) {
         addEntryPopup addEntryPopups = new addEntryPopup(null, true, this);
         addEntryPopups.setVisible(true);
-    }//GEN-LAST:event_menuLoginActionPerformed
+    }
 
-    private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoutActionPerformed
-        // TODO add your handling code here:
+    private void menuEditEntryActionPerformed(java.awt.event.ActionEvent evt) {
+        findEntryPopup findEntryPopups = new findEntryPopup(null, true, this);
+        findEntryPopups.setVisible(true);
+        // TODO findEntryPopups has buttons to "Edit" or "Delete" which trigger other actions
+    }
+
+    private void menuDeleteEntryActionPerformed(java.awt.event.ActionEvent evt) {
+        /* Not implemented
+        deleteEntryPopup deleteEntryPopups = new deleteEntryPopup(null, true, this);
+        deleteEntryPopups.setVisible(true);
+        */
+    }
+
+    private void menuFindEntryActionPerformed(java.awt.event.ActionEvent evt) {
+        findEntryPopup findEntryPopups = new findEntryPopup(null, true, this);
+        findEntryPopups.setVisible(true);
+    }
+
+    private void menuViewEntriesActionPerformed(java.awt.event.ActionEvent evt) {
+        /* Not implemented
+        viewEntriesPopup viewEntriesPopups = new viewEntriesPopup(null, true, this);
+        viewEntriesPopups.setVisible(true);
+        */
+    }
+
+    private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {
         isLoggin(false);
-    }//GEN-LAST:event_menuLogoutActionPerformed
+    }
 
-    private void menuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
-        // TODO add your handling code here:
+    private void menuLoginActionPerformed(java.awt.event.ActionEvent evt) {
         loginPopup loginPopups = new loginPopup(null, true, this);
         loginPopups.setVisible(true);
-    }//GEN-LAST:event_menuLoginActionPerformed
+    }
 
     Master1Frame master1Frame;
     private void menuMaster1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMaster1ActionPerformed
@@ -341,8 +403,13 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuLogout;
     private javax.swing.JMenu menuEdit;
     private javax.swing.JMenuItem menuAddEntry;
+    private javax.swing.JMenuItem menuEditEntry;
+    private javax.swing.JMenuItem menuDeleteEntry;
+    private javax.swing.JMenuItem menuFindEntry;
+    private javax.swing.JMenuItem menuViewEntries;
     private javax.swing.JMenuItem menuMaster2;
     private javax.swing.JLabel txtLoginAs;
     private javax.swing.JLabel userLabel;
+
     // End of variables declaration//GEN-END:variables
 }
