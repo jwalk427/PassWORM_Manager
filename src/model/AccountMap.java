@@ -35,4 +35,11 @@ if these methods are successful?*/
             acctMap.get(t).printAccount();
         }
     }
+
+    // find by title
+    public void getAccount(String title){
+        if (acctMap.containsKey(title)){
+            acctMap.get(title).printAccount();
+        }
+    }
 }
