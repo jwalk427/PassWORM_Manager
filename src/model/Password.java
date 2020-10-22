@@ -12,28 +12,47 @@ public class Password {
     private KeyGenerator keyGen;
     private byte[] pword;
 
-    public Password(String password) throws Exception {
-        cipher = Cipher.getInstance("AES");
-        keyGen = KeyGenerator.getInstance("AES");
-        keyGen.init(256);
-        secretKey = keyGen.generateKey();
-        pword = encrypt(password);
+    public Password(String password) {
+        try{
+            cipher = Cipher.getInstance("AES");
+            keyGen = KeyGenerator.getInstance("AES");
+        } catch(Exception e){
+            System.out.print("Exception thrown:" + e);
+        } finally{
+            keyGen.init(256);
+            secretKey = keyGen.generateKey();
+            try{
+                pword = encrypt(password);
+            } catch(Exception e){
+                System.out.print("Exception thrown:" + e);
+            }
+        }
     }
 
-    private byte[] encrypt(String message) throws Exception {
-        cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        byte[] encrypted = cipher.doFinal(message.getBytes());
+    private byte[] encrypt(String message) {
+        byte[] encrypted = null;
+        try{
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            encrypted = cipher.doFinal(message.getBytes());
+        } catch(Exception e){
+            System.out.print("Exception thrown:" + e);
+        }
         return encrypted;
     }
 
-    public String decrypt() throws Exception {
-        cipher.init(Cipher.DECRYPT_MODE, secretKey);
-        String decrypted = new String(cipher.doFinal(this.pword), StandardCharsets.UTF_8);
+    public String decrypt() {
+        String decrypted = "";
+        try{
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            decrypted = new String(cipher.doFinal(this.pword), StandardCharsets.UTF_8);
+        } catch(Exception e){
+            System.out.print("Exception thrown:" + e);
+        }
         return decrypted;
     }
 
     /*Main class for testing and debugging*/
-    // public static void main(String[] args) throws Exception 
+    // public static void main(String[] args)  
     // { 
     //     Password password = new Password("thisispassword");
     //     System.out.println("thisispassword");

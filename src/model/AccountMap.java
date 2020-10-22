@@ -11,7 +11,7 @@ public class AccountMap {
     }
 /*Should I return booleans to let the user know
 if these methods are successful?*/
-    public void addAccount(String title, String username, String url, String password, String notes) throws Exception {
+    public void addAccount(String title, String username, String url, String password, String notes){
         Account newAcct = new Account(username, url, password, notes);
         acctMap.put(title, newAcct);
     }
@@ -22,14 +22,14 @@ if these methods are successful?*/
         }
     }
 
-    public void changeAccount(String title, String username, String url, String password, String notes) throws Exception {
+    public void changeAccount(String title, String username, String url, String password, String notes){
         if(acctMap.containsKey(title)){
             acctMap.remove(title);
             this.addAccount(title, username, url, password, notes);
         }
     }
 
-    public void printAccounts() throws Exception {
+    public void printAccounts() {
         for(String t : acctMap.keySet()){
             System.out.println(t + ": ");
             acctMap.get(t).printAccount();

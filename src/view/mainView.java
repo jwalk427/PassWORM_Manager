@@ -58,7 +58,7 @@ public final class mainView extends javax.swing.JFrame {
         menuMaster2.setEnabled(b);
 
         if (b) {
-            txtLoginAs.setText("login as : ");
+            txtLoginAs.setText("logged in as : ");
         } else {
             txtLoginAs.setText("you must login first.");
             userLabel.setText("");

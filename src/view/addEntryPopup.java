@@ -9,6 +9,8 @@ package view;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
+import model.User;
+
 /**
  *
  * @author jitzu
@@ -28,7 +30,7 @@ public class addEntryPopup extends javax.swing.JDialog {
         //txtPassword.setText("admin");
     }
 
-    private void createdEntry(){
+    private void createdEntry()  {
         String usertxt = txtUsername.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
         String titletxt = txtTitle.getText();
@@ -37,10 +39,9 @@ public class addEntryPopup extends javax.swing.JDialog {
         
         if(titletxt.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Title and password required.");
-        }else if(usertxt.equals("admin") && passtxt.equals("admin")){
-            mainViews.isLoggin(true);
-            mainViews.getUserLabel().setText(usertxt);
-            this.dispose();
+        }else {
+            //Add account information to User
+            User.getInstance().addAccount(titletxt, usertxt, URLtxt, passtxt, notestxt);
         }
     }
     /**

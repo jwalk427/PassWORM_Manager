@@ -10,6 +10,8 @@ import view.MFA;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
+import model.User;
+
 /**
  *
  * @author jitzu
@@ -25,8 +27,8 @@ public class loginPopup extends javax.swing.JDialog {
         this.mainViews = mainViews;
         initComponents();        
         setLocationRelativeTo(null);
-        txtUsername.setText("admin");
-        txtPassword.setText("admin");
+        txtUsername.setText("username");
+        txtPassword.setText("password");
     }
 
     private void loggedIn(){
@@ -38,7 +40,7 @@ public class loginPopup extends javax.swing.JDialog {
 
         if(usertxt.equalsIgnoreCase("") && passtxt.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Username or password still empty.");
-        }else if(usertxt.equals("admin") && passtxt.equals("admin")){
+        }else if(usertxt.equals(User.getInstance().getUserName()) && User.getInstance().confirmPassword(passtxt)){
             mainViews.isLoggin(true);
             mainViews.getUserLabel().setText(usertxt);
             this.dispose();
