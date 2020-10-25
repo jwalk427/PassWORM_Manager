@@ -24,7 +24,20 @@ if these methods are successful?*/
 
     public void changeAccount(String title, String username, String url, String password, String notes){
         if(acctMap.containsKey(title)){
-            acctMap.remove(title);
+            //Change only those that are not an empty string
+            Account oldAcct = acctMap.remove(title);
+            if(username.equals("")){
+                username = oldAcct.getUsername();
+            }
+            if(url.equals("")){
+                url = oldAcct.getUrl();
+            }
+            if(password.equals("")){
+                password = oldAcct.getPassword();
+            }
+            if(notes.equals("")){
+                notes = oldAcct.getNotes();
+            }
             this.addAccount(title, username, url, password, notes);
         }
     }

@@ -15,8 +15,23 @@ public class Account {
         notes = Notes;
     }
 
-    public void printAccount() {
-        System.out.println("Username: " + username + "\n" + "URL: " + url + "\n" + "Password: " + pword.decrypt());
-        System.out.println("Notes: " + notes);
+    public String getUsername(){
+        return username;
+    }
+
+    public String getUrl(){
+        return url;
+    }
+
+    public String getPassword(){
+        return pword.decrypt();
+    }
+
+    public String getNotes(){
+        return notes;
+    }
+
+    public String printAccount() {
+        return ("Username: " + username + "\t" + "URL: " + url + "\t" + "Password: " + pword.decrypt() + "\t" + "Notes: " + notes);
     }
 }
