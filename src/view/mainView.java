@@ -17,6 +17,7 @@ import view.internalframe.Master1Frame;
 import view.internalframe.Master2Frame;
 
 import model.AccountMap;
+import model.User;
 
 /**
  *
@@ -202,6 +203,8 @@ public final class mainView extends javax.swing.JFrame {
         menuEditEntry.setText("Edit Entry");
         menuEditEntry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //Is there a better place to put ths instead of before every call?
+                setAccounts(User.getInstance().getAccounts());
                 menuEditEntryActionPerformed(evt);
             }
         });

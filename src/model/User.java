@@ -64,6 +64,10 @@ public class User {
         acctMap.printAccounts();
     }
 
+    public AccountMap getAccounts(){
+        return acctMap;
+    }
+
     /*Main class for testing/Debugging*/
     // public static void main(String[] args) 
     // {

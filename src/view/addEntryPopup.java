@@ -42,6 +42,7 @@ public class addEntryPopup extends javax.swing.JDialog {
         }else {
             //Add account information to User
             User.getInstance().addAccount(titletxt, usertxt, URLtxt, passtxt, notestxt);
+            this.dispose();
         }
     }
     /**
