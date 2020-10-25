@@ -16,6 +16,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 import view.internalframe.Master1Frame;
 import view.internalframe.Master2Frame;
 
+import model.AccountMap;
+
 /**
  *
  * @author jitzu
@@ -393,6 +395,14 @@ public final class mainView extends javax.swing.JFrame {
         this.userLabel = userLabel;
     }
 
+    public AccountMap getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(AccountMap accounts) {
+        this.accounts = accounts;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuBar jMenuBar1;
@@ -410,6 +420,8 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuMaster2;
     private javax.swing.JLabel txtLoginAs;
     private javax.swing.JLabel userLabel;
+
+    private AccountMap accounts;
 
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 public class AccountMap {
     private HashMap<String, Account> acctMap;
@@ -54,5 +57,10 @@ if these methods are successful?*/
         if (acctMap.containsKey(title)){
             acctMap.get(title).printAccount();
         }
+    }
+
+    //returns list of all keys(titles)
+    public Set<String> getTitles(){
+        return acctMap.keySet();
     }
 }
