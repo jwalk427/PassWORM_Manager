@@ -6,16 +6,20 @@
 package view;
 
 import java.beans.PropertyVetoException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import view.internalframe.Master1Frame;
+import view.internalframe.AccountFrame;
 import view.internalframe.Master2Frame;
-
+import model.Account;
 import model.AccountMap;
 import model.User;
 
@@ -226,6 +230,7 @@ public final class mainView extends javax.swing.JFrame {
         menuViewEntries.setText("View Entries");
         menuViewEntries.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setAccounts(User.getInstance().getAccounts());
                 menuViewEntriesActionPerformed(evt);
             }
         });
@@ -283,12 +288,55 @@ public final class mainView extends javax.swing.JFrame {
         findEntryPopups.setVisible(true);
     }
 
+    AccountFrame accountFrame;
     private void menuViewEntriesActionPerformed(java.awt.event.ActionEvent evt) {
         /* Not implemented
         viewEntriesPopup viewEntriesPopups = new viewEntriesPopup(null, true, this);
         viewEntriesPopups.setVisible(true);
         */
-    }
+
+        //Should I make methods that return account data in the form of a 2d array?
+        //https://stackoverflow.com/questions/19188307/adding-rows-to-jtable-using-a-loop
+        acctFrame = new JFrame("User Accounts");
+        acctText = new JTextArea();
+        for(String title: accounts.getTitles()){
+            // JLabel account = new JLabel();
+            // account.setText(accounts.getAccount(title));
+            // acctText.add(account);
+            acctText.append("Title: " + title + "  " + accounts.getAccount(title) + "\n");
+        }
+        acctText.setEditable(false);
+        acctText.setVisible(true);
+        JScrollPane scrollPane = new JScrollPane(acctText); 
+        acctFrame.add(scrollPane);
+        acctFrame.setSize(300, 200);
+        acctFrame.setVisible(true);
+
+        /*
+        try {
+            if ((accountFrame) == null) {
+                accountFrame = new AccountFrame(this);
+                desktopPane.add(accountFrame);
+            } else {
+                if (frameExist(accountFrame.getTitle())) {
+                    accountFrame.toFront();
+                } else {
+                    desktopPane.add(accountFrame);
+                }
+            }
+                        
+            accountFrame.setVisible(true);
+            accountFrame.setSelected(true);
+            
+            accountFrame.setMaximum(false);
+            accountFrame.setMaximum(true);
+            
+        } catch (PropertyVetoException ex) {
+            System.out.println(ex);
+        }
+        */
+
+    }//GEN-LAST:event_menuMaster1ActionPerformed
 
     private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {
         isLoggin(false);
@@ -299,13 +347,13 @@ public final class mainView extends javax.swing.JFrame {
         loginPopups.setVisible(true);
     }
 
-    Master1Frame master1Frame;
+    /*AccountFrame master1Frame;
     private void menuMaster1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMaster1ActionPerformed
 
         // TODO add your handling code here:
         try {
             if ((master1Frame) == null) {
-                master1Frame = new Master1Frame();
+                master1Frame = new AccountFrame();
                 desktopPane.add(master1Frame);
             } else {
                 if (frameExist(master1Frame.getTitle())) {
@@ -354,6 +402,7 @@ public final class mainView extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_menuMaster2ActionPerformed
+    */
 
     /**
      * @param args the command line arguments
@@ -423,6 +472,10 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuMaster2;
     private javax.swing.JLabel txtLoginAs;
     private javax.swing.JLabel userLabel;
+
+    private javax.swing.JFrame acctFrame;
+    private javax.swing.JTextArea acctText;
+
 
     private AccountMap accounts;
 

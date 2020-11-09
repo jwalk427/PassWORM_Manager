@@ -53,9 +53,12 @@ if these methods are successful?*/
     }
 
     // find by title
-    public void getAccount(String title){
+    public String getAccount(String title){
         if (acctMap.containsKey(title)){
-            acctMap.get(title).printAccount();
+            return acctMap.get(title).printAccount();
+        }
+        else{
+            return "";
         }
     }
 

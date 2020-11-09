@@ -32,6 +32,6 @@ public class Account {
     }
 
     public String printAccount() {
-        return ("Username: " + username + "\t" + "URL: " + url + "\t" + "Password: " + pword.decrypt() + "\t" + "Notes: " + notes);
+        return ("Username: " + username + "  " + "URL: " + url + "  " + "Password: " + pword.decrypt() + "  " + "Notes: " + notes);
     }
 }
