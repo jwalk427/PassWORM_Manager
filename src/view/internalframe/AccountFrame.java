@@ -55,6 +55,7 @@ public class AccountFrame extends javax.swing.JInternalFrame {
         }*/
 
         //TODO: Create Edit(Similar to an add account form) and Delete(Dialog with Yes/No choice) popups.
+        //Figure out how to use Edit/Delete buttons for a selected table element
         //Add the JButtons for "Edit" and "Delete" that opens Edit/Delete popups. Reflect to data model.
 
         Set<String> temp = null;
