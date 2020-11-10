@@ -44,6 +44,19 @@ public class AccountFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        //TODO: Find a way to allow user to go to URL when an element is clicked? Or add another button to do so ("Visit")?
+        /*import java.awt.Desktop;
+        import java.net.URI;
+
+        // ...
+
+        if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
+            Desktop.getDesktop().browse(new URI("http://www.example.com"));
+        }*/
+
+        //TODO: Create Edit(Similar to an add account form) and Delete(Dialog with Yes/No choice) popups.
+        //Add the JButtons for "Edit" and "Delete" that opens Edit/Delete popups. Reflect to data model.
+
         Set<String> temp = null;
         System.out.println(accounts.getTitles());
         if (!accounts.getTitles().isEmpty()){
