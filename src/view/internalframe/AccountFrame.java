@@ -6,6 +6,16 @@
 
 package view.internalframe;
 
+import java.util.Set;
+
+import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 import model.AccountMap;
 import view.mainView;
 
@@ -18,9 +28,11 @@ public class AccountFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form Master1Frame1
      */
-    public AccountFrame(mainView mainViews) {
-        initComponents();
+    public AccountFrame(mainView mainViews, JDesktopPane parent) {
+        super("User Accounts", true, true, true, true);
         accounts = mainViews.getAccounts();
+        desktop = parent;
+        initComponents();
     }
 
     /**
@@ -32,84 +44,73 @@ public class AccountFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setTitle("User Accounts");
+        Set<String> temp = null;
+        System.out.println(accounts.getTitles());
+        if (!accounts.getTitles().isEmpty()){
+            temp = accounts.getTitles();
+        }
+        //Special cases
+        if (temp == null){
+            JOptionPane.showMessageDialog(null, "There are no stored accounts.");
+            return;
+        }
+        
+        String[] columns = {"Title", "Username", "URL", "Password", "Notes"};
+        String[][] data = new String[accounts.getTitles().size()][5];
+
+        int i = 0;
+        for(String title: accounts.getTitles()){
+            String[] accountArray = accounts.getAccountArray(title);
+            data[i][0] = title;
+            data[i][1] = accountArray[0];
+            data[i][2] = accountArray[1];
+            data[i][3] = accountArray[2];
+            data[i][4] = accountArray[3];
+            i++;
+        }
+
+        acctTable = new JTable(data, columns);
+        acctTable.setModel(new DefaultTableModel(data, columns) {
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               return false;
+            }
+        });
+        acctTable.setBounds(0, 0, 500, 300);
+
+        scrollPane = new JScrollPane(acctTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGap(0, 394, Short.MAX_VALUE)
-                //.addComponent(accounts.getAccount(title), javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-
-        //Figure out a way to create an array of components (account information) and print them within the window in a for loop
-        for (String title : accounts.getTitles()){
-            layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGap(0, 394, Short.MAX_VALUE)
-                    //.addComponent(accounts.getAccount(title), javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-            );
-        }
-
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
-        );
-        
-        /*javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 20, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelLogin)
+                .addComponent(scrollPane)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin)
-                    .addComponent(btnCancelLogin))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        ); */
+                .addComponent(scrollPane)
+                .addContainerGap())
+        );
+
+        // this.add(scrollPane);
+        // this.setSize(500, 400);
+        // this.setVisible(true);
+        // desktop.add(this);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private JDesktopPane desktop;
     private AccountMap accounts;
+    private JTable acctTable;
+    private JScrollPane scrollPane;
     // End of variables declaration//GEN-END:variables
 }

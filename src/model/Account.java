@@ -34,4 +34,9 @@ public class Account {
     public String printAccount() {
         return ("Username: " + username + "  " + "URL: " + url + "  " + "Password: " + pword.decrypt() + "  " + "Notes: " + notes);
     }
+
+    public String[] printAccountArray() {
+        String[] acctInfo = {username, url, pword.decrypt(), notes};
+        return acctInfo;
+    }
 }

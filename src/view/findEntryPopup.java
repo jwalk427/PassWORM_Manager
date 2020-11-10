@@ -14,7 +14,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 import model.AccountMap;
 
@@ -22,19 +27,21 @@ import model.AccountMap;
  *
  * @author jitzu
  */
-public class findEntryPopup extends javax.swing.JDialog {
+public class findEntryPopup extends javax.swing.JFrame {
 
     /**
      * Creates new form findEntryPopup
      */
     private mainView mainViews;
 
-    public findEntryPopup(java.awt.Frame parent, boolean modal, mainView mainViews) {
-        super(parent, modal);
+    public findEntryPopup(JDesktopPane parent, boolean modal, mainView mainViews) {
+        //super(parent, modal);
+        super();
         this.mainViews = mainViews;
         initComponents();
         setLocationRelativeTo(null);
         accounts = mainViews.getAccounts();
+        desktop = parent;
     }
 
     /**
@@ -123,7 +130,8 @@ public class findEntryPopup extends javax.swing.JDialog {
         boolean found = false;
         String titletxt = txtTitle.getText();
         Set<String> temp = null;
-        if (accounts.getTitles() != null){
+        System.out.println(accounts.getTitles());
+        if (!accounts.getTitles().isEmpty()){
             temp = accounts.getTitles();
         }
         //Special cases
@@ -131,7 +139,6 @@ public class findEntryPopup extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "There are no stored accounts.");
             return;
         }
-        System.out.println("temp is not null");
 
         //Search
         for (String s : temp) {
@@ -144,6 +151,27 @@ public class findEntryPopup extends javax.swing.JDialog {
         //Not found
         if (!found) {
             JOptionPane.showMessageDialog(null, "Could not find the account " + titletxt);
+        }
+        
+        //Found - print all accounts whose titles contain the search term
+        else{
+            JInternalFrame findFrame = new JInternalFrame("Search Results for: " + "\"" + titletxt + "\"", true, true, true, true);
+            JTextArea findText = new JTextArea();
+            for(String s: temp){
+                String l = s;
+                if(l.toLowerCase().contains(titletxt)){
+                    findText.append("Title: " + s + "  " + accounts.getAccount(s) + "\n");
+                }
+            }
+            findText.setEditable(false);
+            findText.setVisible(true);
+            JScrollPane scrollPane = new JScrollPane(findText);
+            findFrame.add(scrollPane);
+            findFrame.setSize(480, 360);
+            findFrame.setVisible(true);
+            desktop.add(findFrame);
+
+            this.dispose();
         }
     }
 
@@ -202,5 +230,6 @@ public class findEntryPopup extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField txtTitle;
     private AccountMap accounts;
+    private JDesktopPane desktop;
     // End of variables declaration//GEN-END:variables
 }

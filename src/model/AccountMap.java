@@ -62,6 +62,15 @@ if these methods are successful?*/
         }
     }
 
+    public String[] getAccountArray(String title){
+        if (acctMap.containsKey(title)){
+            return acctMap.get(title).printAccountArray();
+        }
+        else{
+            return null;
+        }
+    }
+
     //returns list of all keys(titles)
     public Set<String> getTitles(){
         return acctMap.keySet();

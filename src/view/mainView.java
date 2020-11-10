@@ -235,24 +235,7 @@ public final class mainView extends javax.swing.JFrame {
             }
         });
         menuEdit.add(menuViewEntries);
-        
-/*
-        menuMaster1.setText("");
-        menuMaster1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuMaster1ActionPerformed(evt);
-            }
-        });
-        menuMaster.add(menuMaster1);
- 
-        menuMaster2.setText("Master Simple 2");
-        menuMaster2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuMaster2ActionPerformed(evt);
-            }
-        });
-        menuMaster.add(menuMaster2);
-*/
+
         jMenuBar1.add(menuEdit);
 
         setJMenuBar(jMenuBar1);
@@ -271,7 +254,7 @@ public final class mainView extends javax.swing.JFrame {
     }
 
     private void menuEditEntryActionPerformed(java.awt.event.ActionEvent evt) {
-        findEntryPopup findEntryPopups = new findEntryPopup(null, true, this);
+        findEntryPopup findEntryPopups = new findEntryPopup(desktopPane, true, this);
         findEntryPopups.setVisible(true);
         // TODO findEntryPopups has buttons to "Edit" or "Delete" which trigger other actions
     }
@@ -284,57 +267,20 @@ public final class mainView extends javax.swing.JFrame {
     }
 
     private void menuFindEntryActionPerformed(java.awt.event.ActionEvent evt) {
+        findEntryPopup findEntryPopups = new findEntryPopup(desktopPane, true, this);
+        findEntryPopups.setVisible(true);
+
+    }//GEN-LAST:event_menuMaster1ActionPerformed
+
+    /*private void menuFindEntryActionPerformed(java.awt.event.ActionEvent evt) {
         findEntryPopup findEntryPopups = new findEntryPopup(null, true, this);
         findEntryPopups.setVisible(true);
-    }
+    }*/
 
-    AccountFrame accountFrame;
     private void menuViewEntriesActionPerformed(java.awt.event.ActionEvent evt) {
-        /* Not implemented
-        viewEntriesPopup viewEntriesPopups = new viewEntriesPopup(null, true, this);
-        viewEntriesPopups.setVisible(true);
-        */
-
-        //Should I make methods that return account data in the form of a 2d array?
-        //https://stackoverflow.com/questions/19188307/adding-rows-to-jtable-using-a-loop
-        acctFrame = new JFrame("User Accounts");
-        acctText = new JTextArea();
-        for(String title: accounts.getTitles()){
-            // JLabel account = new JLabel();
-            // account.setText(accounts.getAccount(title));
-            // acctText.add(account);
-            acctText.append("Title: " + title + "  " + accounts.getAccount(title) + "\n");
-        }
-        acctText.setEditable(false);
-        acctText.setVisible(true);
-        JScrollPane scrollPane = new JScrollPane(acctText); 
-        acctFrame.add(scrollPane);
-        acctFrame.setSize(300, 200);
-        acctFrame.setVisible(true);
-
-        /*
-        try {
-            if ((accountFrame) == null) {
-                accountFrame = new AccountFrame(this);
-                desktopPane.add(accountFrame);
-            } else {
-                if (frameExist(accountFrame.getTitle())) {
-                    accountFrame.toFront();
-                } else {
-                    desktopPane.add(accountFrame);
-                }
-            }
-                        
-            accountFrame.setVisible(true);
-            accountFrame.setSelected(true);
-            
-            accountFrame.setMaximum(false);
-            accountFrame.setMaximum(true);
-            
-        } catch (PropertyVetoException ex) {
-            System.out.println(ex);
-        }
-        */
+        AccountFrame accountFrame = new AccountFrame(this, desktopPane);
+        desktopPane.add(accountFrame);
+        accountFrame.setVisible(true);
 
     }//GEN-LAST:event_menuMaster1ActionPerformed
 
@@ -347,62 +293,6 @@ public final class mainView extends javax.swing.JFrame {
         loginPopups.setVisible(true);
     }
 
-    /*AccountFrame master1Frame;
-    private void menuMaster1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMaster1ActionPerformed
-
-        // TODO add your handling code here:
-        try {
-            if ((master1Frame) == null) {
-                master1Frame = new AccountFrame();
-                desktopPane.add(master1Frame);
-            } else {
-                if (frameExist(master1Frame.getTitle())) {
-                    master1Frame.toFront();
-                } else {
-                    desktopPane.add(master1Frame);
-                }
-            }
-                        
-            master1Frame.setVisible(true);
-            master1Frame.setSelected(true);
-            
-            master1Frame.setMaximum(false);
-            master1Frame.setMaximum(true);
-            
-        } catch (PropertyVetoException ex) {
-            System.out.println(ex);
-        }
-
-    }//GEN-LAST:event_menuMaster1ActionPerformed
-
-    Master2Frame master2Frame;
-    private void menuMaster2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMaster2ActionPerformed
-        // TODO add your handling code here:
-        try {
-            if ((master2Frame) == null) {
-                master2Frame = new Master2Frame();
-                desktopPane.add(master2Frame);
-            } else {
-                if (frameExist(master2Frame.getTitle())) {
-                    master2Frame.toFront();
-                } else {
-                    desktopPane.add(master2Frame);
-                }
-            }
-
-            master2Frame.setVisible(true);
-            master2Frame.setSelected(true);
-            
-            master2Frame.setMaximum(false);
-            master2Frame.setMaximum(true);
-
-        } catch (PropertyVetoException ex) {
-            System.out.println(ex);
-        }
-
-
-    }//GEN-LAST:event_menuMaster2ActionPerformed
-    */
 
     /**
      * @param args the command line arguments
@@ -473,8 +363,11 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JLabel txtLoginAs;
     private javax.swing.JLabel userLabel;
 
-    private javax.swing.JFrame acctFrame;
+    private javax.swing.JInternalFrame acctFrame;
     private javax.swing.JTextArea acctText;
+
+    private javax.swing.JFrame findFrame;
+    private javax.swing.JTextArea findText;
 
 
     private AccountMap accounts;
