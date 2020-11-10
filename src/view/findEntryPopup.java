@@ -7,6 +7,8 @@
 package view;
 
 import view.MFA;
+import view.internalframe.SearchFrame;
+
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -130,7 +132,6 @@ public class findEntryPopup extends javax.swing.JFrame {
         boolean found = false;
         String titletxt = txtTitle.getText();
         Set<String> temp = null;
-        System.out.println(accounts.getTitles());
         if (!accounts.getTitles().isEmpty()){
             temp = accounts.getTitles();
         }
@@ -155,21 +156,25 @@ public class findEntryPopup extends javax.swing.JFrame {
         
         //Found - print all accounts whose titles contain the search term
         else{
-            JInternalFrame findFrame = new JInternalFrame("Search Results for: " + "\"" + titletxt + "\"", true, true, true, true);
-            JTextArea findText = new JTextArea();
-            for(String s: temp){
-                String l = s;
-                if(l.toLowerCase().contains(titletxt)){
-                    findText.append("Title: " + s + "  " + accounts.getAccount(s) + "\n");
-                }
-            }
-            findText.setEditable(false);
-            findText.setVisible(true);
-            JScrollPane scrollPane = new JScrollPane(findText);
-            findFrame.add(scrollPane);
-            findFrame.setSize(480, 360);
-            findFrame.setVisible(true);
-            desktop.add(findFrame);
+            //JInternalFrame findFrame = new JInternalFrame("Search Results for: " + "\"" + titletxt + "\"", true, true, true, true);
+            SearchFrame searchFrame = new SearchFrame(mainViews, desktop, titletxt);
+            desktop.add(searchFrame);
+            searchFrame.setVisible(true);
+            // searchFrame.setVisible(true);
+            // JTextArea findText = new JTextArea();
+            // for(String s: temp){
+            //     String l = s;
+            //     if(l.toLowerCase().contains(titletxt)){
+            //         findText.append("Title: " + s + "  " + accounts.getAccount(s) + "\n");
+            //     }
+            // }
+            // findText.setEditable(false);
+            // findText.setVisible(true);
+            // JScrollPane scrollPane = new JScrollPane(findText);
+            // findFrame.add(scrollPane);
+            // findFrame.setSize(480, 360);
+            // findFrame.setVisible(true);
+            // desktop.add(findFrame);
 
             this.dispose();
         }
