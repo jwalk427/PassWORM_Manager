@@ -52,14 +52,14 @@ public class AccountFrame extends javax.swing.JInternalFrame {
         btnEdit.setText("Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // btnEditActionPerformed(evt);
+                btnEditActionPerformed(evt);
             }
         });
 
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // btnDeleteActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -144,6 +144,15 @@ public class AccountFrame extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt){
+
+    }
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt){
+        JOptionPane.showOptionDialog(null, "message", "title", 2, 3, null, null, null);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

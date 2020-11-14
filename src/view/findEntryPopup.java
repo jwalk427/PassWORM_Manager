@@ -117,13 +117,11 @@ public class findEntryPopup extends javax.swing.JFrame {
     }
 
     private void btnCancelFindActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         txtTitle.setText("");
         this.dispose();
     }
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         searchEntries();
 
     }

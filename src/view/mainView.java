@@ -256,7 +256,9 @@ public final class mainView extends javax.swing.JFrame {
     private void menuEditEntryActionPerformed(java.awt.event.ActionEvent evt) {
         findEntryPopup findEntryPopups = new findEntryPopup(desktopPane, true, this);
         findEntryPopups.setVisible(true);
-        // TODO findEntryPopups has buttons to "Edit" or "Delete" which trigger other actions
+        // select highlighted entry and show edit or delete buttons
+        // edit:
+        // editEntryPopup editEntryPopups = new editEntryPopup(null, true, this);
     }
 
     private void menuDeleteEntryActionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,19 +272,14 @@ public final class mainView extends javax.swing.JFrame {
         findEntryPopup findEntryPopups = new findEntryPopup(desktopPane, true, this);
         findEntryPopups.setVisible(true);
 
-    }//GEN-LAST:event_menuMaster1ActionPerformed
-
-    /*private void menuFindEntryActionPerformed(java.awt.event.ActionEvent evt) {
-        findEntryPopup findEntryPopups = new findEntryPopup(null, true, this);
-        findEntryPopups.setVisible(true);
-    }*/
+    }
 
     private void menuViewEntriesActionPerformed(java.awt.event.ActionEvent evt) {
         AccountFrame accountFrame = new AccountFrame(this, desktopPane);
         desktopPane.add(accountFrame);
         accountFrame.setVisible(true);
 
-    }//GEN-LAST:event_menuMaster1ActionPerformed
+    }
 
     private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {
         isLoggin(false);
@@ -310,8 +307,7 @@ public final class mainView extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
