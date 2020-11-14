@@ -8,6 +8,7 @@ package view.internalframe;
 
 import java.util.Set;
 
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -43,6 +44,24 @@ public class AccountFrame extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                // btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                // btnDeleteActionPerformed(evt);
+            }
+        });
 
         //TODO: Find a way to allow user to go to URL when an element is clicked? Or add another button to do so ("Visit")?
         /*import java.awt.Desktop;
@@ -59,7 +78,6 @@ public class AccountFrame extends javax.swing.JInternalFrame {
         //Add the JButtons for "Edit" and "Delete" that opens Edit/Delete popups. Reflect to data model.
 
         Set<String> temp = null;
-        System.out.println(accounts.getTitles());
         if (!accounts.getTitles().isEmpty()){
             temp = accounts.getTitles();
         }
@@ -103,14 +121,21 @@ public class AccountFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(scrollPane)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelete).addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scrollPane)
-                .addContainerGap())
-        );
+                .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnEdit).addComponent(btnDelete))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         // this.add(scrollPane);
         // this.setSize(500, 400);
@@ -126,5 +151,7 @@ public class AccountFrame extends javax.swing.JInternalFrame {
     private AccountMap accounts;
     private JTable acctTable;
     private JScrollPane scrollPane;
+    private JButton btnEdit;
+    private JButton btnDelete;
     // End of variables declaration//GEN-END:variables
 }
