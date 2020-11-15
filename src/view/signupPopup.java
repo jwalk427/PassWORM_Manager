@@ -9,6 +9,8 @@ package view;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
+import model.User;
+
 /**
  *
  * @author jitzu
@@ -29,7 +31,7 @@ public class signupPopup extends javax.swing.JDialog {
         txtPassword.setText("password");
     }
 
-    private void signedUp(){
+    private void signedUp()  {
         String usertxt = txtUsername.getText();
         String emailtxt = txtEmail.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
@@ -38,6 +40,8 @@ public class signupPopup extends javax.swing.JDialog {
         if(usertxt.equalsIgnoreCase("") || emailtxt.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Username or password still empty.");
         }else{
+            //Create the user with info provided
+            User.User(usertxt, emailtxt, passtxt);
             mainViews.isSignup(true);
             this.dispose();
         }
@@ -153,14 +157,14 @@ public class signupPopup extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelSignUpActionPerformed
 
-    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt)  {// GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
         
        signedUp();
         
     }//GEN-LAST:event_btnSignUpActionPerformed
 
-    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt)  {// GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
          if (evt.getKeyCode()==KeyEvent.VK_ENTER){
             signedUp();

@@ -8,15 +8,35 @@ public class Account {
     private String notes;
     
 //Change this to account, map user input title to user, url, password, notes
-    public Account(String Username, String Url, String Password, String Notes) throws Exception {
+    public Account(String Username, String Url, String Password, String Notes){
         username = Username;
         url = Url;
         pword = new Password(Password);
         notes = Notes;
     }
 
-    public void printAccount() throws Exception {
-        System.out.println("Username: " + username + "\n" + "URL: " + url + "\n" + "Password: " + pword.decrypt());
-        System.out.println("Notes: " + notes);
+    public String getUsername(){
+        return username;
+    }
+
+    public String getUrl(){
+        return url;
+    }
+
+    public String getPassword(){
+        return pword.decrypt();
+    }
+
+    public String getNotes(){
+        return notes;
+    }
+
+    public String printAccount() {
+        return ("Username: " + username + "  " + "URL: " + url + "  " + "Password: " + pword.decrypt() + "  " + "Notes: " + notes);
+    }
+
+    public String[] printAccountArray() {
+        String[] acctInfo = {username, url, pword.decrypt(), notes};
+        return acctInfo;
     }
 }

@@ -1,25 +1,40 @@
 package model;
 
 public class User {
+    private static User userInstance = null;
     private String userName;
     private String email;
     private Password pword;
     private AccountMap acctMap;
     
+    public static User User(String Username, String Email, String password) 
+    { 
+        // To ensure only one instance is created 
+        if (userInstance == null) 
+        { 
+            userInstance = new User(Username, Email, password); 
+        } 
+        return userInstance; 
+    } 
 
-    public User(String Username, String Email, String password) throws Exception {
+    public static User getInstance() 
+    { 
+        return userInstance;
+    } 
+
+    private User(String Username, String Email, String password) {
         userName = Username;
         email = Email;
         pword = new Password(password);
         acctMap = new AccountMap();
     }
 
-    public User() throws Exception {
-        userName = "default";
-        email = "default@email.com";
-        pword = new Password("default");
-        acctMap = new AccountMap();
-    }
+    // public User() {
+    //     userName = "default";
+    //     email = "default@email.com";
+    //     pword = new Password("default");
+    //     acctMap = new AccountMap();
+    // }
 
     public String getUserName(){
         return userName;
@@ -29,7 +44,11 @@ public class User {
         return email;
     }
 
-    public void addAccount(String title, String username, String url, String password, String notes) throws Exception {
+    public boolean confirmPassword(String pass){
+        return pass.equals(pword.decrypt());
+    }
+
+    public void addAccount(String title, String username, String url, String password, String notes) {
         acctMap.addAccount(title, username, url, password, notes);
     }
 
@@ -37,16 +56,20 @@ public class User {
         acctMap.removeAccount(website);
     }
 
-    public void changeAccount(String title, String username, String url, String password, String notes) throws Exception {
+    public void changeAccount(String title, String username, String url, String password, String notes) {
         acctMap.changeAccount(title, username, url, password, notes);
     }
 
-    public void printAccounts() throws Exception {
+    public void printAccounts() {
         acctMap.printAccounts();
     }
 
+    public AccountMap getAccounts(){
+        return acctMap;
+    }
+
     /*Main class for testing/Debugging*/
-    // public static void main(String[] args) throws Exception 
+    // public static void main(String[] args) 
     // {
     //     User user = new User("jwalk427", "jwalk427@gmail.com", "password");
     //     user.addAccount("test1", "username", "www.test1.com", "password#1","");

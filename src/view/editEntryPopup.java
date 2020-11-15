@@ -6,7 +6,6 @@
 
 package view;
 
-import view.MFA;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
@@ -16,34 +15,36 @@ import model.User;
  *
  * @author jitzu
  */
-public class loginPopup extends javax.swing.JDialog {
+public class editEntryPopup extends javax.swing.JDialog {
 
     /**
      * Creates new form loginPopup
      */
     private mainView mainViews;
-    public loginPopup(java.awt.Frame parent, boolean modal, mainView mainViews) {
+    public editEntryPopup(java.awt.Frame parent, boolean modal, mainView mainViews) {
         super(parent, modal);
         this.mainViews = mainViews;
         initComponents();        
         setLocationRelativeTo(null);
-        txtUsername.setText("username");
-        txtPassword.setText("password");
+        //txtUsername.setText("admin");
+        //txtPassword.setText("admin");
     }
 
-    private void loggedIn(){
+    private void changedEntry()  {
+        /*
         String usertxt = txtUsername.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
-
-        if(usertxt.equalsIgnoreCase("") && passtxt.equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "Username or password still empty.");
-        }else if(usertxt.equals(User.getInstance().getUserName()) && User.getInstance().confirmPassword(passtxt)){
-            this.dispose();
-            MFAPopup mfa = new MFAPopup(null, true, mainViews, usertxt);
-            mfa.setVisible(true);
-        }else{
-            JOptionPane.showMessageDialog(null, "Username or password do not match.");
+        String titletxt = txtTitle.getText();
+        String notestxt = txtNotes.getText();
+        String URLtxt = txtURL.getText();
+        
+        if(titletxt.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Title and password required.");
+        }else {
+            //Add account information to User
+            User.getInstance().addAccount(titletxt, usertxt, URLtxt, passtxt, notestxt);
         }
+        */
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,18 +57,32 @@ public class loginPopup extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtTitle = new javax.swing.JTextField();
+        txtURL = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
+        txtNotes = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
-        btnLogin = new javax.swing.JButton();
-        btnCancelLogin = new javax.swing.JButton();
+        btnEditEntry = new javax.swing.JButton();
+        btnCancelEditEntry = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Login Form");
+        setTitle("Edit Entry Form");
 
-        jLabel1.setText("Username :");
+        jLabel1.setText("Title :");
 
-        jLabel2.setText("Password :");
+        jLabel2.setText("URL :");
+
+        jLabel4.setText("Username :");
+
+        jLabel5.setText("Password :");
+
+        jLabel6.setText("Notes :");
+
+        // Code to initialize text boxes with text from chosen entry to be edited
 
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -75,19 +90,17 @@ public class loginPopup extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("*) default username : admin pass: admin");
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnEditEntry.setText("Confirm");
+        btnEditEntry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                btnEditEntryActionPerformed(evt);
             }
         });
 
-        btnCancelLogin.setText("Cancel");
-        btnCancelLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelEditEntry.setText("Cancel");
+        btnCancelEditEntry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelLoginActionPerformed(evt);
+                btnCancelEditEntryActionPerformed(evt);
             }
         });
 
@@ -101,20 +114,34 @@ public class loginPopup extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
+                        .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
                         .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 20, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogin)
+                .addComponent(btnEditEntry)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelLogin)
+                .addComponent(btnCancelEditEntry)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -123,41 +150,56 @@ public class loginPopup extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
+                    .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLogin)
-                    .addComponent(btnCancelLogin))
+                    .addComponent(jLabel4)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtNotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditEntry)
+                    .addComponent(btnCancelEditEntry))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelLoginActionPerformed
-        // TODO add your handling code here:
+    private void btnCancelEditEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelLoginActionPerformed
+        /* TODO reset to the entry's original values
         txtPassword.setText("");
         txtUsername.setText("");
+        txtTitle.setText("");
+        txtUsername.setText("");
+        txtURL.setText("");
+        txtNotes.setText("");
         this.dispose();
+        */
     }//GEN-LAST:event_btnCancelLoginActionPerformed
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnEditEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
+        changedEntry();
         
-       loggedIn();
         
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         // TODO add your handling code here:
          if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            loggedIn();
+            changedEntry();
         }
     }//GEN-LAST:event_txtPasswordKeyPressed
 
@@ -204,12 +246,21 @@ public class loginPopup extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelLogin;
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnCancelEditEntry;
+    private javax.swing.JButton btnEditEntry;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+
     private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtTitle;
+    private javax.swing.JTextField txtURL;
     private javax.swing.JTextField txtUsername;
+    private javax.swing.JTextField txtNotes;
+
+
     // End of variables declaration//GEN-END:variables
 }

@@ -6,15 +6,22 @@
 package view;
 
 import java.beans.PropertyVetoException;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import view.internalframe.Master1Frame;
+import view.internalframe.AccountFrame;
 import view.internalframe.Master2Frame;
+import model.Account;
+import model.AccountMap;
+import model.User;
 
 /**
  *
@@ -38,6 +45,10 @@ public final class mainView extends javax.swing.JFrame {
         menuLogin.setEnabled(b);
         menuLogout.setEnabled(false);
         menuAddEntry.setEnabled(false);
+        menuEditEntry.setEnabled(false);
+        menuDeleteEntry.setEnabled(false);
+        menuViewEntries.setEnabled(false);
+        menuFindEntry.setEnabled(false);
         menuMaster2.setEnabled(b);
 
         if (!b) {
@@ -55,10 +66,15 @@ public final class mainView extends javax.swing.JFrame {
         menuLogin.setEnabled(!b);
         menuLogout.setEnabled(b);
         menuAddEntry.setEnabled(b);
+        // Enabled for testing purposes only (only allowed if an entry exists)
+        menuEditEntry.setEnabled(b);
+        menuDeleteEntry.setEnabled(b);
+        menuViewEntries.setEnabled(b);
+        menuFindEntry.setEnabled(b);
         menuMaster2.setEnabled(b);
 
         if (b) {
-            txtLoginAs.setText("login as : ");
+            txtLoginAs.setText("logged in as : ");
         } else {
             txtLoginAs.setText("you must login first.");
             userLabel.setText("");
@@ -97,6 +113,10 @@ public final class mainView extends javax.swing.JFrame {
         menuLogout = new javax.swing.JMenuItem();
         menuEdit = new javax.swing.JMenu();
         menuAddEntry = new javax.swing.JMenuItem();
+        menuEditEntry = new javax.swing.JMenuItem();
+        menuDeleteEntry = new javax.swing.JMenuItem();
+        menuFindEntry = new javax.swing.JMenuItem();
+        menuViewEntries = new javax.swing.JMenuItem();
         menuMaster2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,7 +143,7 @@ public final class mainView extends javax.swing.JFrame {
 
         userLabel.setText("user");
 
-        txtLoginAs.setText("login as :");
+        txtLoginAs.setText("logged in as :");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -184,24 +204,38 @@ public final class mainView extends javax.swing.JFrame {
             }
         });
         menuEdit.add(menuAddEntry);
-        
-/*
-        menuMaster1.setText("");
-        menuMaster1.addActionListener(new java.awt.event.ActionListener() {
+        menuEditEntry.setText("Edit Entry");
+        menuEditEntry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuMaster1ActionPerformed(evt);
+                //Is there a better place to put ths instead of before every call?
+                setAccounts(User.getInstance().getAccounts());
+                menuEditEntryActionPerformed(evt);
             }
         });
-        menuMaster.add(menuMaster1);
- 
-        menuMaster2.setText("Master Simple 2");
-        menuMaster2.addActionListener(new java.awt.event.ActionListener() {
+        menuEdit.add(menuEditEntry);
+        menuDeleteEntry.setText("Delete Entry");
+        menuDeleteEntry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuMaster2ActionPerformed(evt);
+                menuDeleteEntryActionPerformed(evt);
             }
         });
-        menuMaster.add(menuMaster2);
-*/
+        menuEdit.add(menuDeleteEntry);
+        menuFindEntry.setText("Find Entry");
+        menuFindEntry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFindEntryActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuFindEntry);
+        menuViewEntries.setText("View Entries");
+        menuViewEntries.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setAccounts(User.getInstance().getAccounts());
+                menuViewEntriesActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuViewEntries);
+
         jMenuBar1.add(menuEdit);
 
         setJMenuBar(jMenuBar1);
@@ -209,84 +243,53 @@ public final class mainView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
-        // TODO add your handling code here:
+    private void menuSignupActionPerformed(java.awt.event.ActionEvent evt) {
         signupPopup signupPopups = new signupPopup(null, true, this);
         signupPopups.setVisible(true);
-    }//GEN-LAST:event_menuLoginActionPerformed
+    }
 
-    private void menuAddEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
-        // TODO add your handling code here:
+    private void menuAddEntryActionPerformed(java.awt.event.ActionEvent evt) {
         addEntryPopup addEntryPopups = new addEntryPopup(null, true, this);
         addEntryPopups.setVisible(true);
-    }//GEN-LAST:event_menuLoginActionPerformed
+    }
 
-    private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLogoutActionPerformed
-        // TODO add your handling code here:
+    private void menuEditEntryActionPerformed(java.awt.event.ActionEvent evt) {
+        findEntryPopup findEntryPopups = new findEntryPopup(desktopPane, true, this);
+        findEntryPopups.setVisible(true);
+        // select highlighted entry and show edit or delete buttons
+        // edit:
+        // editEntryPopup editEntryPopups = new editEntryPopup(null, true, this);
+    }
+
+    private void menuDeleteEntryActionPerformed(java.awt.event.ActionEvent evt) {
+        /* Not implemented
+        deleteEntryPopup deleteEntryPopups = new deleteEntryPopup(null, true, this);
+        deleteEntryPopups.setVisible(true);
+        */
+    }
+
+    private void menuFindEntryActionPerformed(java.awt.event.ActionEvent evt) {
+        findEntryPopup findEntryPopups = new findEntryPopup(desktopPane, true, this);
+        findEntryPopups.setVisible(true);
+
+    }
+
+    private void menuViewEntriesActionPerformed(java.awt.event.ActionEvent evt) {
+        AccountFrame accountFrame = new AccountFrame(this, desktopPane);
+        desktopPane.add(accountFrame);
+        accountFrame.setVisible(true);
+
+    }
+
+    private void menuLogoutActionPerformed(java.awt.event.ActionEvent evt) {
         isLoggin(false);
-    }//GEN-LAST:event_menuLogoutActionPerformed
+    }
 
-    private void menuLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLoginActionPerformed
-        // TODO add your handling code here:
+    private void menuLoginActionPerformed(java.awt.event.ActionEvent evt) {
         loginPopup loginPopups = new loginPopup(null, true, this);
         loginPopups.setVisible(true);
-    }//GEN-LAST:event_menuLoginActionPerformed
+    }
 
-    Master1Frame master1Frame;
-    private void menuMaster1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMaster1ActionPerformed
-
-        // TODO add your handling code here:
-        try {
-            if ((master1Frame) == null) {
-                master1Frame = new Master1Frame();
-                desktopPane.add(master1Frame);
-            } else {
-                if (frameExist(master1Frame.getTitle())) {
-                    master1Frame.toFront();
-                } else {
-                    desktopPane.add(master1Frame);
-                }
-            }
-                        
-            master1Frame.setVisible(true);
-            master1Frame.setSelected(true);
-            
-            master1Frame.setMaximum(false);
-            master1Frame.setMaximum(true);
-            
-        } catch (PropertyVetoException ex) {
-            System.out.println(ex);
-        }
-
-    }//GEN-LAST:event_menuMaster1ActionPerformed
-
-    Master2Frame master2Frame;
-    private void menuMaster2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMaster2ActionPerformed
-        // TODO add your handling code here:
-        try {
-            if ((master2Frame) == null) {
-                master2Frame = new Master2Frame();
-                desktopPane.add(master2Frame);
-            } else {
-                if (frameExist(master2Frame.getTitle())) {
-                    master2Frame.toFront();
-                } else {
-                    desktopPane.add(master2Frame);
-                }
-            }
-
-            master2Frame.setVisible(true);
-            master2Frame.setSelected(true);
-            
-            master2Frame.setMaximum(false);
-            master2Frame.setMaximum(true);
-
-        } catch (PropertyVetoException ex) {
-            System.out.println(ex);
-        }
-
-
-    }//GEN-LAST:event_menuMaster2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -304,8 +307,7 @@ public final class mainView extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(mainView.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
@@ -331,6 +333,14 @@ public final class mainView extends javax.swing.JFrame {
         this.userLabel = userLabel;
     }
 
+    public AccountMap getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(AccountMap accounts) {
+        this.accounts = accounts;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuBar jMenuBar1;
@@ -341,8 +351,22 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuLogout;
     private javax.swing.JMenu menuEdit;
     private javax.swing.JMenuItem menuAddEntry;
+    private javax.swing.JMenuItem menuEditEntry;
+    private javax.swing.JMenuItem menuDeleteEntry;
+    private javax.swing.JMenuItem menuFindEntry;
+    private javax.swing.JMenuItem menuViewEntries;
     private javax.swing.JMenuItem menuMaster2;
     private javax.swing.JLabel txtLoginAs;
     private javax.swing.JLabel userLabel;
+
+    private javax.swing.JInternalFrame acctFrame;
+    private javax.swing.JTextArea acctText;
+
+    private javax.swing.JFrame findFrame;
+    private javax.swing.JTextArea findText;
+
+
+    private AccountMap accounts;
+
     // End of variables declaration//GEN-END:variables
 }
