@@ -34,24 +34,13 @@ public class loginPopup extends javax.swing.JDialog {
     private void loggedIn(){
         String usertxt = txtUsername.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
-        
-        String code = MFA.generateCode();
-        //MFA.sendEmail(code);
-        //TODO: create MFA object (if not singleton) either in here, MFA popup, or main views
-        //Create MFA code, send to email
-        //Create an MFA popup and show it
-        //Entry box of MFA popup should match MFA code, if not send a message
-        //Time limit?
 
         if(usertxt.equalsIgnoreCase("") && passtxt.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Username or password still empty.");
         }else if(usertxt.equals(User.getInstance().getUserName()) && User.getInstance().confirmPassword(passtxt)){
             this.dispose();
-            //TODO: Handle mfa authentication - find some way to return boolean that determines success of authentication
-            // MFAPopup mfa = new MFAPopup(null, true, mainViews);
-            // mfa.setVisible(true);
-            mainViews.isLoggin(true);
-            mainViews.getUserLabel().setText(usertxt);
+            MFAPopup mfa = new MFAPopup(null, true, mainViews, usertxt);
+            mfa.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Username or password do not match.");
         }

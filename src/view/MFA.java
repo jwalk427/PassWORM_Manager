@@ -7,6 +7,8 @@ import javax.activation.*;
 
 public class MFA {
 
+
+
    public static String generateCode(){
 
       Date date = new Date();
