@@ -49,6 +49,8 @@ public class AccountFrame extends javax.swing.JInternalFrame {
 
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnEdit.setEnabled(false);
+        btnDelete.setEnabled(false);
 
         btnEdit.setText("Edit");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -110,7 +112,14 @@ public class AccountFrame extends javax.swing.JInternalFrame {
                return false;
             }
         });
+
         acctTable.setBounds(0, 0, 500, 300);
+
+        acctTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableClickActionPerformed(evt);
+            }
+        });
 
         scrollPane = new JScrollPane(acctTable);
 
@@ -146,6 +155,15 @@ public class AccountFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tableClickActionPerformed(java.awt.event.MouseEvent evt){
+        int column = 0;
+        int row = acctTable.getSelectedRow();
+        String title = acctTable.getModel().getValueAt(row, column).toString();
+        if(title != null){
+            btnEdit.setEnabled(true);
+            btnDelete.setEnabled(true);
+        }
+    }
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt){
 
