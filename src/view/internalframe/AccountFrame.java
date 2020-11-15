@@ -10,6 +10,7 @@ import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -151,15 +152,21 @@ public class AccountFrame extends javax.swing.JInternalFrame {
     }
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt){
-        JOptionPane.showOptionDialog(null, "Are you sure you want to delete this entry?", "Deletion Confirmation", 2, 3, null, null, null);
-        delete();
-    }
-
-    private void delete(){
         int column = 0;
         int row = acctTable.getSelectedRow();
-        String value = acctTable.getModel().getValueAt(row, column).toString();
-        System.out.println(value);
+        String title = acctTable.getModel().getValueAt(row, column).toString();
+        if(title != null){
+            int answer = JOptionPane.showOptionDialog(null, "Are you sure you want to delete this entry?", "Deletion Confirmation", 2, 3, null, null, null);
+            if (answer == JOptionPane.YES_OPTION) {
+                delete(title);
+            }
+        }
+    }
+
+    private void delete(String title){
+        accounts.removeAccount(title);
+        JOptionPane.showMessageDialog(null, title + " successfully deleted.");
+        this.dispose();
     }
 
 

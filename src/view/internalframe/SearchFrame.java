@@ -8,6 +8,7 @@ package view.internalframe;
 
 import java.util.Set;
 
+import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -44,9 +45,26 @@ public class SearchFrame extends javax.swing.JInternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+
+        btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         Set<String> temp = null;
-        System.out.println(accounts.getTitles());
         if (!accounts.getTitles().isEmpty()){
             temp = accounts.getTitles();
         }
@@ -98,13 +116,21 @@ public class SearchFrame extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(scrollPane)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnDelete).addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(scrollPane)
-                .addContainerGap())
+                .addContainerGap()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnEdit).addComponent(btnDelete))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         // this.add(scrollPane);
@@ -115,6 +141,28 @@ public class SearchFrame extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt){
+
+    }
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt){
+        int column = 0;
+        int row = acctTable.getSelectedRow();
+        String title = acctTable.getModel().getValueAt(row, column).toString();
+        if(title != null){
+            int answer = JOptionPane.showOptionDialog(null, "Are you sure you want to delete this entry?", "Deletion Confirmation", 2, 3, null, null, null);
+            if (answer == JOptionPane.YES_OPTION) {
+                delete(title);
+            }
+        }
+    }
+
+    private void delete(String title){
+        accounts.removeAccount(title);
+        JOptionPane.showMessageDialog(null, title + " successfully deleted.");
+        this.dispose();
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private JDesktopPane desktop;
@@ -122,5 +170,7 @@ public class SearchFrame extends javax.swing.JInternalFrame {
     private JTable acctTable;
     private JScrollPane scrollPane;
     private String searchTerm;
+    private JButton btnEdit;
+    private JButton btnDelete;
     // End of variables declaration//GEN-END:variables
 }
