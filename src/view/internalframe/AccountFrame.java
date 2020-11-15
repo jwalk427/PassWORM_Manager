@@ -151,7 +151,15 @@ public class AccountFrame extends javax.swing.JInternalFrame {
     }
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt){
-        JOptionPane.showOptionDialog(null, "message", "title", 2, 3, null, null, null);
+        JOptionPane.showOptionDialog(null, "Are you sure you want to delete this entry?", "Deletion Confirmation", 2, 3, null, null, null);
+        delete();
+    }
+
+    private void delete(){
+        int column = 0;
+        int row = acctTable.getSelectedRow();
+        String value = acctTable.getModel().getValueAt(row, column).toString();
+        System.out.println(value);
     }
 
 
