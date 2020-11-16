@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.awt.Image;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.beans.PropertyVetoException;
 import java.util.Set;
 import java.util.logging.Level;
@@ -12,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -104,7 +108,17 @@ public final class mainView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        desktopPane = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(this.getClass().getResource("/images/nontransparent.png"));
+        Image image = icon.getImage();
+        JLabel label = new JLabel(icon);
+        label.setIcon(icon);
+        desktopPane = new javax.swing.JDesktopPane() {
+            public void paintComponent(Graphics g){
+                Graphics2D g2d = (Graphics2D)g;
+                g2d.scale((double)getWidth()/image.getWidth(null), (double)getHeight()/image.getHeight(null));
+                g2d.drawImage(image, 0, 0, this);
+            }
+        };
         jPanel1 = new javax.swing.JPanel();
         userLabel = new javax.swing.JLabel();
         txtLoginAs = new javax.swing.JLabel();
