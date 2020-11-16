@@ -33,6 +33,7 @@ import model.User;
  */
 public final class mainView extends javax.swing.JFrame {
 
+    private final ImageIcon worm = new ImageIcon(this.getClass().getResource("/images/worm.png"));
     /**
      * Creates new form mainView
      */
@@ -41,6 +42,10 @@ public final class mainView extends javax.swing.JFrame {
         initComponents();
         //set to true if an account exists
         isSignup(false);
+    }
+
+    public ImageIcon getWorm() {
+        return worm;
     }
 
     //Do not show signup if user has an account

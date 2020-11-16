@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import model.AccountMap;
+import view.editEntryPopup;
 import view.mainView;
 
 /**
@@ -26,6 +27,7 @@ import view.mainView;
  */
 public class SearchFrame extends javax.swing.JInternalFrame {
 
+    private mainView mainViews;
     /**
      * Creates new form Master1Frame1
      */
@@ -34,6 +36,7 @@ public class SearchFrame extends javax.swing.JInternalFrame {
         accounts = mainViews.getAccounts();
         desktop = parent;
         searchTerm = search;
+        this.mainViews = mainViews;
         initComponents();
     }
 
@@ -160,7 +163,13 @@ public class SearchFrame extends javax.swing.JInternalFrame {
     }
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt){
-
+        int column = 0;
+        int row = acctTable.getSelectedRow();
+        String title = acctTable.getModel().getValueAt(row, column).toString();
+        if(title != null){
+            editEntryPopup editEntryPopups = new editEntryPopup(null, true, mainViews, title);
+            editEntryPopups.setVisible(true);
+        }
     }
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt){

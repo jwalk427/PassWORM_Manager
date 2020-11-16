@@ -7,6 +7,9 @@
 package view;
 
 import java.awt.event.KeyEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import model.User;
@@ -37,10 +40,11 @@ public class signupPopup extends javax.swing.JDialog {
         String emailtxt = txtEmail.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
         String conftxt = String.valueOf(txtConfirm.getPassword());
-        
+
         //Add extra password, output message if they are not the same
         if(usertxt.equalsIgnoreCase("") || emailtxt.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("") || conftxt.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Username, email, or password still empty.");
+            
         } else if(!passtxt.equals(conftxt)){
             JOptionPane.showMessageDialog(null, "Passwords do not match.");
         } else if(!emailtxt.contains("@") || !emailtxt.contains(".")){
@@ -74,6 +78,7 @@ public class signupPopup extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Sign Up Form");
+        setIconImage(mainViews.getWorm().getImage());
 
         jLabel1.setText("Username :");
 

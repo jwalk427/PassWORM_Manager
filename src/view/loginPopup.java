@@ -67,6 +67,7 @@ public class loginPopup extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Login Form");
+        setIconImage(mainViews.getWorm().getImage());
 
         jLabel1.setText("Username :");
 

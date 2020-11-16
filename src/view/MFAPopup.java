@@ -73,6 +73,7 @@ public class MFAPopup extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("MFA Authenticator");
+        setIconImage(mainViews.getWorm().getImage());
 
         jLabel1.setText("Please enter the code sent to your email: ");
 

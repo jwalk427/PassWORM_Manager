@@ -70,6 +70,7 @@ public class addEntryPopup extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add Entry Form");
+        setIconImage(mainViews.getWorm().getImage());
 
         jLabel1.setText("Title :");
 

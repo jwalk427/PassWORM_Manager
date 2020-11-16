@@ -63,6 +63,7 @@ public class findEntryPopup extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Search Entries");
+        setIconImage(mainViews.getWorm().getImage());
 
         jLabel1.setText("Find by keywords in account title:");
 
