@@ -44,6 +44,7 @@ public final class mainView extends javax.swing.JFrame {
         menuSignup.setEnabled(!b);
         menuLogin.setEnabled(b);
         menuLogout.setEnabled(false);
+        menuChangePassword.setEnabled(b);
         menuAddEntry.setEnabled(false);
         menuEditEntry.setEnabled(false);
         menuDeleteEntry.setEnabled(false);
@@ -65,6 +66,7 @@ public final class mainView extends javax.swing.JFrame {
         menuSignup.setEnabled(false);
         menuLogin.setEnabled(!b);
         menuLogout.setEnabled(b);
+        menuChangePassword.setEnabled(true);
         menuAddEntry.setEnabled(b);
         // Enabled for testing purposes only (only allowed if an entry exists)
         menuEditEntry.setEnabled(b);
@@ -111,6 +113,7 @@ public final class mainView extends javax.swing.JFrame {
         menuSignup = new javax.swing.JMenuItem();
         menuLogin = new javax.swing.JMenuItem();
         menuLogout = new javax.swing.JMenuItem();
+        menuChangePassword = new javax.swing.JMenuItem();
         menuEdit = new javax.swing.JMenu();
         menuAddEntry = new javax.swing.JMenuItem();
         menuEditEntry = new javax.swing.JMenuItem();
@@ -193,6 +196,14 @@ public final class mainView extends javax.swing.JFrame {
             }
         });
         menuFile.add(menuLogout);
+
+        menuChangePassword.setText("Change Password");
+        menuChangePassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuChangePasswordPerformed(evt);
+            }
+        });
+        menuFile.add(menuChangePassword);
 
         jMenuBar1.add(menuFile);
 
@@ -290,6 +301,11 @@ public final class mainView extends javax.swing.JFrame {
         loginPopups.setVisible(true);
     }
 
+    private void menuChangePasswordPerformed(java.awt.event.ActionEvent evt) {
+        changePasswordPopup changePasswordPopups = new changePasswordPopup(null, true, this);
+        changePasswordPopups.setVisible(true);
+    }
+
 
     /**
      * @param args the command line arguments
@@ -349,6 +365,7 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuSignup;
     private javax.swing.JMenuItem menuLogin;
     private javax.swing.JMenuItem menuLogout;
+    private javax.swing.JMenuItem menuChangePassword;
     private javax.swing.JMenu menuEdit;
     private javax.swing.JMenuItem menuAddEntry;
     private javax.swing.JMenuItem menuEditEntry;
