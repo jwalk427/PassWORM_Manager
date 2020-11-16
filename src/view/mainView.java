@@ -285,16 +285,11 @@ public final class mainView extends javax.swing.JFrame {
     private void menuEditEntryActionPerformed(java.awt.event.ActionEvent evt) {
         findEntryPopup findEntryPopups = new findEntryPopup(desktopPane, true, this);
         findEntryPopups.setVisible(true);
-        // select highlighted entry and show edit or delete buttons
-        // edit:
-        // editEntryPopup editEntryPopups = new editEntryPopup(null, true, this);
     }
 
     private void menuDeleteEntryActionPerformed(java.awt.event.ActionEvent evt) {
-        /* Not implemented
-        deleteEntryPopup deleteEntryPopups = new deleteEntryPopup(null, true, this);
-        deleteEntryPopups.setVisible(true);
-        */
+        findEntryPopup findEntryPopups = new findEntryPopup(desktopPane, true, this);
+        findEntryPopups.setVisible(true);
     }
 
     private void menuFindEntryActionPerformed(java.awt.event.ActionEvent evt) {
