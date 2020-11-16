@@ -29,17 +29,23 @@ public class signupPopup extends javax.swing.JDialog {
         txtUsername.setText("username");
         txtEmail.setText("email");
         txtPassword.setText("password");
+        txtConfirm.setText("password");
     }
 
     private void signedUp()  {
         String usertxt = txtUsername.getText();
         String emailtxt = txtEmail.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
+        String conftxt = String.valueOf(txtConfirm.getPassword());
         
         //Add extra password, output message if they are not the same
-        if(usertxt.equalsIgnoreCase("") || emailtxt.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "Username or password still empty.");
-        }else{
+        if(usertxt.equalsIgnoreCase("") || emailtxt.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("") || conftxt.equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Username, email, or password still empty.");
+        } else if(!passtxt.equals(conftxt)){
+            JOptionPane.showMessageDialog(null, "Passwords do not match.");
+        } else if(!emailtxt.contains("@") || !emailtxt.contains(".")){
+            JOptionPane.showMessageDialog(null, "Please enter a valid email address.");
+        } else{
             //Create the user with info provided
             User.User(usertxt, emailtxt, passtxt);
             mainViews.isSignup(true);
@@ -58,9 +64,11 @@ public class signupPopup extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
+        txtConfirm = new javax.swing.JPasswordField();
         btnSignUp = new javax.swing.JButton();
         btnCancelSignUp = new javax.swing.JButton();
 
@@ -73,7 +81,9 @@ public class signupPopup extends javax.swing.JDialog {
 
         jLabel2.setText("Password :");
 
-        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+        jLabel4.setText("Confirm Password :");
+
+        txtConfirm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPasswordKeyPressed(evt);
             }
@@ -112,9 +122,14 @@ public class signupPopup extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 20, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -138,6 +153,10 @@ public class signupPopup extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -151,6 +170,7 @@ public class signupPopup extends javax.swing.JDialog {
 
     private void btnCancelSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelSignUpActionPerformed
         // TODO add your handling code here:
+        txtConfirm.setText("");
         txtPassword.setText("");
         txtEmail.setText("");
         txtUsername.setText("");
@@ -225,6 +245,8 @@ public class signupPopup extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField txtConfirm;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     private javax.swing.JTextField txtEmail;
