@@ -21,30 +21,32 @@ public class editEntryPopup extends javax.swing.JDialog {
      * Creates new form loginPopup
      */
     private mainView mainViews;
-    public editEntryPopup(java.awt.Frame parent, boolean modal, mainView mainViews) {
+    private String[] accountValues;
+    public editEntryPopup(java.awt.Frame parent, boolean modal, mainView mainViews, String title) {
         super(parent, modal);
         this.mainViews = mainViews;
         initComponents();        
         setLocationRelativeTo(null);
-        //txtUsername.setText("admin");
-        //txtPassword.setText("admin");
+        txtUsername.setText(accountValues[0]);
+        accountValues = mainViews.getAccounts().getAccountArray(title);
+        setOldAcctValues();
+    }
+
+    private void setOldAcctValues() {
+        txtUsername.setText(accountValues[0]);
+        txtPassword.setText(accountValues[2]);
+        txtNotes.setText(accountValues[3]);
+        txtURL.setText(accountValues[1]);
     }
 
     private void changedEntry()  {
-        /*
         String usertxt = txtUsername.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
         String titletxt = txtTitle.getText();
         String notestxt = txtNotes.getText();
         String URLtxt = txtURL.getText();
-        
-        if(titletxt.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "Title and password required.");
-        }else {
-            //Add account information to User
-            User.getInstance().addAccount(titletxt, usertxt, URLtxt, passtxt, notestxt);
-        }
-        */
+
+        User.getInstance().changeAccount(titletxt, usertxt, URLtxt, passtxt, notestxt);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -175,33 +177,21 @@ public class editEntryPopup extends javax.swing.JDialog {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void btnCancelEditEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelLoginActionPerformed
-        /* TODO reset to the entry's original values
-        txtPassword.setText("");
-        txtUsername.setText("");
-        txtTitle.setText("");
-        txtUsername.setText("");
-        txtURL.setText("");
-        txtNotes.setText("");
-        this.dispose();
-        */
-    }//GEN-LAST:event_btnCancelLoginActionPerformed
+    private void btnCancelEditEntryActionPerformed(java.awt.event.ActionEvent evt) {
+        setOldAcctValues();
+    }
 
-    private void btnEditEntryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+    private void btnEditEntryActionPerformed(java.awt.event.ActionEvent evt) {
         changedEntry();
-        
-        
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }
 
-    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-        // TODO add your handling code here:
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {
          if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-            changedEntry();
+            //changedEntry();
         }
-    }//GEN-LAST:event_txtPasswordKeyPressed
+    }
 
     /**
      * @param args the command line arguments
@@ -230,19 +220,6 @@ public class editEntryPopup extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                loginPopup dialog = new loginPopup(new javax.swing.JFrame(), true);
-//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        System.exit(0);
-//                    }
-//                });
-//                dialog.setVisible(true);
-//            }
-//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
