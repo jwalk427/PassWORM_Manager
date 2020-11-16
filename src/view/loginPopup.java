@@ -39,7 +39,8 @@ public class loginPopup extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Username or password still empty.");
         }else if(usertxt.equals(User.getInstance().getUserName()) && User.getInstance().confirmPassword(passtxt)){
             this.dispose();
-            MFAPopup mfa = new MFAPopup(null, true, mainViews, usertxt);
+            //email empty for now as we can't yet retrieve user account info
+            MFAPopup mfa = new MFAPopup(null, true, mainViews, usertxt, "");
             mfa.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Username or password do not match.");

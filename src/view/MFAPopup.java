@@ -43,17 +43,17 @@ public class MFAPopup extends javax.swing.JDialog {
     
     private String code = "";
 
-    public MFAPopup(java.awt.Frame parent, boolean modal, mainView mainViews, String usertxt) {
+    public MFAPopup(java.awt.Frame parent, boolean modal, mainView mainViews, String username, String userEmail) {
         super(parent, modal);
         this.mainViews = mainViews;
         initComponents();
         setLocationRelativeTo(null);
         accounts = mainViews.getAccounts();
-        this.usertxt = usertxt;
+        this.usertxt = username;
         //time is set to current time plus 3 minutes
         time = Instant.now().getEpochSecond() + 180;
         code = MFA.generateCode();
-        MFA.sendEmail(code);
+        MFA.sendEmail(code, userEmail);
     }
 
     /**

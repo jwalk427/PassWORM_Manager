@@ -24,11 +24,14 @@ public class MFA {
       return ret;
    }
 
-   public static void sendEmail(String code) {    
-      // Recipient's email ID needs to be mentioned.
-      String to = "hansooms14@yahoo.com";
+   public static void sendEmail(String code, String email) {    
 
-      // Sender's email ID needs to be mentioned
+      //If email is empty then goes to Hans's yahoo as default cuz why not
+      String to = "hansooms14@yahoo.com";
+      if (!email.equals("")) {
+        to = email;
+      }
+      
       String from = "passwormmanager@gmail.com";
 
       // Get system properties
