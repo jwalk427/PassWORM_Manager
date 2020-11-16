@@ -48,6 +48,10 @@ public class User {
         return pass.equals(pword.decrypt());
     }
 
+    public void changePassword(String pass){
+        pword = new Password(pass);
+    }
+
     public void addAccount(String title, String username, String url, String password, String notes) {
         acctMap.addAccount(title, username, url, password, notes);
     }
