@@ -7,10 +7,6 @@ import model.User;
   * https://github.com/gaborbata/jpass/tree/master/src/main/java/jpass
   * changes made by Michael Rizzoni
   */
- public class  {
- 
-     
- }
 
 public class DataModel {
 
