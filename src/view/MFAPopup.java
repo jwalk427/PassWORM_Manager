@@ -22,6 +22,9 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import java.time.Instant;
+
+
 
 import model.AccountMap;
 
@@ -35,13 +38,22 @@ public class MFAPopup extends javax.swing.JDialog {
      * Creates new form MFAPopup
      */
     private mainView mainViews;
+    private String usertxt = "";
+    private long time = 0;
+    
+    private String code = "";
 
-    public MFAPopup(java.awt.Frame parent, boolean modal, mainView mainViews) {
+    public MFAPopup(java.awt.Frame parent, boolean modal, mainView mainViews, String username, String userEmail) {
         super(parent, modal);
         this.mainViews = mainViews;
         initComponents();
         setLocationRelativeTo(null);
         accounts = mainViews.getAccounts();
+        this.usertxt = username;
+        //time is set to current time plus 3 minutes
+        time = Instant.now().getEpochSecond() + 180;
+        code = MFA.generateCode();
+        MFA.sendEmail(code, userEmail);
     }
 
     /**
@@ -121,15 +133,22 @@ public class MFAPopup extends javax.swing.JDialog {
     }
 
     private void btnEnterActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
         authenticate();
 
     }
 
     private void authenticate() {
-        //TODO: create MFA object (if not singleton) either in here, log-in popup, or main views
-        //Create MFA code, send to email
-        //Entry box should match MFA code, if not send a message
+        if (Instant.now().getEpochSecond() < time){
+            if (txtTitle.getText().equals(code)){
+            mainViews.isLoggin(true);
+            mainViews.getUserLabel().setText(usertxt);
+            this.dispose();
+            } else {
+            System.out.print("Incorrect code");
+            }
+        } else {
+            System.out.println("Error: Code timed out");
+        }
         //Time limit?
     }
 

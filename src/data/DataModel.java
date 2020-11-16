@@ -2,6 +2,12 @@ package data;
 
 import model.User;
 
+ /**
+  * based off of JPass data model
+  * https://github.com/gaborbata/jpass/tree/master/src/main/java/jpass
+  * changes made by Michael Rizzoni
+  */
+
 public class DataModel {
 
     private static DataModel INSTANCE;
@@ -37,11 +43,11 @@ public class DataModel {
         this.fileName = fileName;
     }
 
-    private final boolean isModified() {
+    public final boolean isModified() {
         return this.modified;
     }
 
-    private final void setModified(final boolean modified) {
+    public final void setModified(final boolean modified) {
         this.modified = modified;
     }
 

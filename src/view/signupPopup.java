@@ -159,8 +159,14 @@ public class signupPopup extends javax.swing.JDialog {
 
     private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt)  {// GEN-FIRST:event_btnSignUpActionPerformed
         // TODO add your handling code here:
-        
+        boolean signUp = false;
        signedUp();
+       if (signUp) {
+            this.dispose();
+            //String email = txtEmail.getText(); Not using this yet as the default email doesn't exist
+            MFAPopup mfa = new MFAPopup(null, true, mainViews, txtUsername.getText(), "");
+            mfa.setVisible(true);
+       }
         
     }//GEN-LAST:event_btnSignUpActionPerformed
 
