@@ -27,12 +27,15 @@ public class editEntryPopup extends javax.swing.JDialog {
         this.mainViews = mainViews;
         initComponents();        
         setLocationRelativeTo(null);
-        txtUsername.setText(accountValues[0]);
+        //txtUsername.setText(accountValues[0]);
         accountValues = mainViews.getAccounts().getAccountArray(title);
+        origTitle = title;
         setOldAcctValues();
     }
 
     private void setOldAcctValues() {
+        txtTitle.setText(origTitle);
+        txtTitle.setEditable(false);
         txtUsername.setText(accountValues[0]);
         txtPassword.setText(accountValues[2]);
         txtNotes.setText(accountValues[3]);
@@ -238,6 +241,8 @@ public class editEntryPopup extends javax.swing.JDialog {
     private javax.swing.JTextField txtURL;
     private javax.swing.JTextField txtUsername;
     private javax.swing.JTextField txtNotes;
+
+    private String origTitle;
 
 
     // End of variables declaration//GEN-END:variables
