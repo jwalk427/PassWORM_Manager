@@ -176,6 +176,7 @@ public class AccountFrame extends javax.swing.JInternalFrame {
             editEntryPopup editEntryPopups = new editEntryPopup(null, true, mainViews, title);
             editEntryPopups.setVisible(true);
         }
+        this.dispose();
     }
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt){

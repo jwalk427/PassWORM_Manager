@@ -50,6 +50,7 @@ public class editEntryPopup extends javax.swing.JDialog {
         String URLtxt = txtURL.getText();
 
         User.getInstance().changeAccount(titletxt, usertxt, URLtxt, passtxt, notestxt);
+        this.dispose();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -185,6 +186,7 @@ public class editEntryPopup extends javax.swing.JDialog {
 
     private void btnCancelEditEntryActionPerformed(java.awt.event.ActionEvent evt) {
         setOldAcctValues();
+        this.dispose();
     }
 
     private void btnEditEntryActionPerformed(java.awt.event.ActionEvent evt) {
