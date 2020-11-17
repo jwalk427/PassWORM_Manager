@@ -42,7 +42,7 @@ public class loginPopup extends javax.swing.JDialog {
             //mainViews.isLoggin(true);
             //Comment out for testing
             //email empty for now as we can't yet retrieve user account info
-             MFAPopup mfa = new MFAPopup(null, true, mainViews, usertxt, "");
+             MFAPopup mfa = new MFAPopup(null, true, mainViews, usertxt, User.getInstance().getEmail());
              mfa.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Username or password do not match.");
