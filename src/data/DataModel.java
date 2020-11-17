@@ -1,7 +1,5 @@
 package data;
 
-import java.io.Serializable;
-
 import model.User;
 
  /**
@@ -10,12 +8,7 @@ import model.User;
   * changes made by Michael Rizzoni
   */
 
-public class DataModel implements Serializable {
-
-    /**
-     * Generated serial version UID
-     */
-    private static final long serialVersionUID = 1317046924976689732L;
+public class DataModel {
 
     private static DataModel INSTANCE;
 

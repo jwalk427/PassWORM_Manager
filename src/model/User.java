@@ -1,12 +1,6 @@
 package model;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
-    /**
-     * Generated serial version UID
-     */
-    private static final long serialVersionUID = -1386766918084784952L;
+public class User {
     private static User userInstance = null;
     private String userName;
     private String email;
@@ -18,17 +12,7 @@ public class User implements Serializable {
         // To ensure only one instance is created 
         if (userInstance == null) 
         { 
-            userInstance = new User(Username, Email, password, new AccountMap()); 
-        } 
-        return userInstance; 
-    } 
-
-    public static User User(User user) 
-    { 
-        // To ensure only one instance is created 
-        if (userInstance == null) 
-        { 
-            userInstance = user; 
+            userInstance = new User(Username, Email, password); 
         } 
         return userInstance; 
     } 
@@ -38,11 +22,11 @@ public class User implements Serializable {
         return userInstance;
     } 
 
-    private User(String Username, String Email, String password, AccountMap map) {
+    private User(String Username, String Email, String password) {
         userName = Username;
         email = Email;
         pword = new Password(password);
-        acctMap = map;
+        acctMap = new AccountMap();
     }
 
     // public User() {

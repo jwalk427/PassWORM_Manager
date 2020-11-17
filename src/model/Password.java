@@ -1,20 +1,15 @@
 package model;
 
-import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
-public class Password implements Serializable {
-    /**
-     * Generated serial version UID
-     */
-    private static final long serialVersionUID = 8955419513388616256L;
-    private transient Cipher cipher;
+public class Password {
+    private Cipher cipher;
     private SecretKey secretKey;
-    private transient KeyGenerator keyGen;
+    private KeyGenerator keyGen;
     private byte[] pword;
 
     public Password(String password) {

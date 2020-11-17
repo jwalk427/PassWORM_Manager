@@ -1,16 +1,11 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class AccountMap implements Serializable {
-    /**
-     * Generated serial version UID
-     */
-    private static final long serialVersionUID = 4880154172558271579L;
+public class AccountMap {
     private HashMap<String, Account> acctMap;
     
 //Change this to account, map user input title to user, url, account, notes
