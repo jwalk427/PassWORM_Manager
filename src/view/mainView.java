@@ -26,14 +26,26 @@ import view.internalframe.Master2Frame;
 import model.Account;
 import model.AccountMap;
 import model.User;
+import data.DataModel;
+import view.helper.FileHelper;
 
 /**
  *
  * @author jitzu
+ * @author Grace McKenzie
+ * @author Jared Walker
+ * @author Hans Ooms
+ * @author Michael Rizzoni
+ * 
  */
 public final class mainView extends javax.swing.JFrame {
 
     private final ImageIcon worm = new ImageIcon(this.getClass().getResource("/images/worm.png"));
+    /**
+     * Generated serial version UID
+     */
+    private static final long serialVersionUID = 1410875374034066520L;
+
     /**
      * Creates new form mainView
      */
@@ -85,10 +97,18 @@ public final class mainView extends javax.swing.JFrame {
         menuMaster2.setEnabled(b);
 
         if (b) {
-            txtLoginAs.setText("logged in as : ");
+            txtLoginAs.setText("logged in as : ");  
         } else {
             txtLoginAs.setText("you must login first.");
             userLabel.setText("");
+            if (this.model.isModified()) {
+                try {
+                    FileHelper.saveFile(this, this.model.getFileName());
+                    clearModel();
+                } catch (Exception e) {
+                    System.err.println(e.getMessage());
+                }
+            }
         }
     }
 
@@ -141,7 +161,7 @@ public final class mainView extends javax.swing.JFrame {
         menuMaster2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("PassWORM Manager");
+        setTitle(PROGRAM_NAME);
 
         desktopPane.setAutoscrolls(true);
         desktopPane.setName(""); // NOI18N
@@ -310,7 +330,7 @@ public final class mainView extends javax.swing.JFrame {
     }
 
     private void menuLoginActionPerformed(java.awt.event.ActionEvent evt) {
-        loginPopup loginPopups = new loginPopup(null, true, this);
+        usernamePopup loginPopups = new usernamePopup(null, true, this);
         loginPopups.setVisible(true);
     }
 
@@ -370,6 +390,27 @@ public final class mainView extends javax.swing.JFrame {
         this.accounts = accounts;
     }
 
+    public DataModel getModel() {
+        return this.model;
+    }
+
+    public void clearModel() {
+        this.model.clear();
+    }
+
+    public void exitFrame() {
+        if (this.model.isModified()) {
+            try {
+                FileHelper.saveFile(this, this.model.getFileName());
+                clearModel();
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
+            return;
+        }
+        System.exit(0);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuBar jMenuBar1;
@@ -395,7 +436,8 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JFrame findFrame;
     private javax.swing.JTextArea findText;
 
-
+    public static final String PROGRAM_NAME = "PassWORM Manager";
+    private final DataModel model = DataModel.getInstance();
     private AccountMap accounts;
 
     // End of variables declaration//GEN-END:variables

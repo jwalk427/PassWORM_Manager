@@ -86,7 +86,7 @@ public final class DocumentRepository {
      * @throws IOException when I/O error occurred
      */
     public void writeDocument(final User document) throws DocumentProcessException, IOException {
-        OutputStream outputStream = null;
+        BufferedOutputStream outputStream = null;
         try {
             outputStream = new BufferedOutputStream(new FileOutputStream(this.fileName));
             CONVERTER.write(document, outputStream);

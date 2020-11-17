@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import model.User;
+import data.DocumentRepository;
 
 /**
  *
@@ -52,6 +53,11 @@ public class signupPopup extends javax.swing.JDialog {
         } else{
             //Create the user with info provided
             User.User(usertxt, emailtxt, passtxt);
+            try {
+                DocumentRepository.newInstance(usertxt + ".xml").writeDocument(User.getInstance());
+            } catch (Exception e) {
+                System.err.println(e.getMessage());
+            }
             mainViews.isSignup(true);
             this.dispose();
         }

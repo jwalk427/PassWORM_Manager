@@ -1,7 +1,12 @@
 package model;
 
+import java.io.Serializable;
 
-public class Account {
+public class Account implements Serializable {
+    /**
+     * Generated serial version UID
+     */
+    private static final long serialVersionUID = -7589644695599361599L;
     private String username;
     private String url;
     private Password pword;

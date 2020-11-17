@@ -6,11 +6,11 @@
 
 package view;
 
-import view.MFA;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 import model.User;
+import data.DocumentRepository;
 
 /**
  *
@@ -22,27 +22,36 @@ public class loginPopup extends javax.swing.JDialog {
      * Creates new form loginPopup
      */
     private mainView mainViews;
-    public loginPopup(java.awt.Frame parent, boolean modal, mainView mainViews) {
+    private String username;
+
+    public loginPopup(java.awt.Frame parent, boolean modal, mainView mainViews, String username) {
         super(parent, modal);
         this.mainViews = mainViews;
+        this.username = username;
+        String fileName = this.username + ".xml";
+        try {
+            this.mainViews.getModel().setUser(DocumentRepository.newInstance(fileName).readDocument());
+            this.mainViews.getModel().setModified(true);
+            this.mainViews.getModel().setFileName(fileName);
+            User.User(this.mainViews.getModel().getUser());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
         initComponents();        
         setLocationRelativeTo(null);
-        txtUsername.setText("username");
         txtPassword.setText("password");
     }
 
     private void loggedIn(){
-        String usertxt = txtUsername.getText();
         String passtxt = String.valueOf(txtPassword.getPassword());
 
-        if(usertxt.equalsIgnoreCase("") && passtxt.equalsIgnoreCase("")){
+        if(this.username.equalsIgnoreCase("") || passtxt.equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Username or password still empty.");
-        }else if(usertxt.equals(User.getInstance().getUserName()) && User.getInstance().confirmPassword(passtxt)){
+        } else if(this.username.equals(User.getInstance().getUserName()) && User.getInstance().confirmPassword(passtxt)){
             this.dispose();
-            //mainViews.isLoggin(true);
-            //Comment out for testing
+            mainViews.isLoggin(true);
             //email empty for now as we can't yet retrieve user account info
-             MFAPopup mfa = new MFAPopup(null, true, mainViews, usertxt, User.getInstance().getEmail());
+             MFAPopup mfa = new MFAPopup(null, true, mainViews, this.username, User.getInstance().getEmail());
              mfa.setVisible(true);
         }else{
             JOptionPane.showMessageDialog(null, "Username or password do not match.");
@@ -59,9 +68,7 @@ public class loginPopup extends javax.swing.JDialog {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        //jLabel3 = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
         btnCancelLogin = new javax.swing.JButton();
 
@@ -69,17 +76,16 @@ public class loginPopup extends javax.swing.JDialog {
         setTitle("Login Form");
         setIconImage(mainViews.getWorm().getImage());
 
-        jLabel1.setText("Username :");
+        jLabel1.setText(this.username);
 
         jLabel2.setText("Password :");
 
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtPasswordKeyPressed(evt);
             }
         });
-
-        //jLabel3.setText("*) default username : admin pass: admin");
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -104,14 +110,11 @@ public class loginPopup extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 20, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            //.addComponent(jLabel3)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -126,15 +129,12 @@ public class loginPopup extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                /*.addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)*/
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLogin)
                     .addComponent(btnCancelLogin))
@@ -146,8 +146,8 @@ public class loginPopup extends javax.swing.JDialog {
 
     private void btnCancelLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelLoginActionPerformed
         // TODO add your handling code here:
-        txtPassword.setText("");
-        txtUsername.setText("");
+        usernamePopup loginPopups = new usernamePopup(null, true, this.mainViews);
+        loginPopups.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCancelLoginActionPerformed
 
@@ -212,8 +212,6 @@ public class loginPopup extends javax.swing.JDialog {
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    //private javax.swing.JLabel jLabel3;
     private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.BufferedOutputStream;
 
 /**
  * Class for conversion between objects and streams representing XMLs.
@@ -43,7 +43,7 @@ public class XmlConverter<T> {
      * @param outputStream the output stream
      * @throws IOException if any error occurred
      */
-    public void write(T document, OutputStream outputStream) throws IOException {
+    public void write(T document, BufferedOutputStream outputStream) throws IOException {
         mapper.writeValue(outputStream, document);
     }
 
