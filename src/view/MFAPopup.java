@@ -44,7 +44,6 @@ class Multithreading extends Thread
         try
         { 
             MFA.sendEmail(code, User.getInstance().getEmail());
-  
         } 
         catch (Exception e) 
         { 
@@ -79,7 +78,6 @@ public class MFAPopup extends javax.swing.JDialog {
         //time is set to current time plus 3 minutes
         time = Instant.now().getEpochSecond() + 180;
         code = MFA.generateCode();
-        
         Multithreading item = new Multithreading(code); 
         item.start(); 
     }
@@ -177,10 +175,10 @@ public class MFAPopup extends javax.swing.JDialog {
             mainViews.getUserLabel().setText(usertxt);
             this.dispose();
             } else {
-            System.out.print("Incorrect code");
+            JOptionPane.showMessageDialog(null, "Error: Incorrect code");
             }
         } else {
-            System.out.println("Error: Code timed out");
+            JOptionPane.showMessageDialog(null, "Error: Code timed out");
         }
         //Time limit?
     }
