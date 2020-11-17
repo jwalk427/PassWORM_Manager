@@ -168,9 +168,7 @@ public class PasswordGenPopup extends javax.swing.JInternalFrame {
 
     private void btnAddEntryActionPerformed(java.awt.event.ActionEvent evt) {
         generate();
-        
-        
-    }/
+    }
 
     /**
      * @param args the command line arguments
