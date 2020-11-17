@@ -17,7 +17,7 @@ import view.mainView;
 
 /**
  *
- * @author WORM
+ * @author WORM with template from jitzu
  */
 public class SearchFrame extends javax.swing.JInternalFrame {
 

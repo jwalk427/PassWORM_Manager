@@ -10,7 +10,7 @@ import model.User;
 
 /**
  *
- * @author WORM
+ * @author WORM with template from jitzu
  */
 public class signupPopup extends javax.swing.JDialog {
 

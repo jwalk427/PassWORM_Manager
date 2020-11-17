@@ -23,7 +23,7 @@ import model.User;
 
 /**
  *
- * @author WORM
+ * @author WORM with template from jitzu
  */
 public final class mainView extends javax.swing.JFrame {
 

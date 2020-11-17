@@ -18,7 +18,7 @@ import view.mainView;
 
 /**
  *
- * @author jitzu
+ * @author WORM with template from jitzu
  */
 public class AccountFrame extends javax.swing.JInternalFrame {
 
