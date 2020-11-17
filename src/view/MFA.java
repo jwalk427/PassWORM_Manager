@@ -5,9 +5,9 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import javax.activation.*;
 
+
+
 public class MFA {
-
-
 
    public static String generateCode(){
 

@@ -53,6 +53,7 @@ public final class mainView extends javax.swing.JFrame {
         menuDeleteEntry.setEnabled(false);
         menuViewEntries.setEnabled(false);
         menuFindEntry.setEnabled(false);
+        menuPasswordGen.setEnabled(false);
         menuMaster2.setEnabled(b);
 
         if (!b) {
@@ -76,6 +77,7 @@ public final class mainView extends javax.swing.JFrame {
         menuDeleteEntry.setEnabled(b);
         menuViewEntries.setEnabled(b);
         menuFindEntry.setEnabled(b);
+        menuPasswordGen.setEnabled(b);
         menuMaster2.setEnabled(b);
 
         if (b) {
@@ -129,6 +131,7 @@ public final class mainView extends javax.swing.JFrame {
         menuDeleteEntry = new javax.swing.JMenuItem();
         menuFindEntry = new javax.swing.JMenuItem();
         menuViewEntries = new javax.swing.JMenuItem();
+        menuPasswordGen = new javax.swing.JMenuItem();
         menuMaster2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -259,6 +262,15 @@ public final class mainView extends javax.swing.JFrame {
         });
         menuEdit.add(menuViewEntries);
 
+        menuPasswordGen.setText("Password Generator");
+        menuPasswordGen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setAccounts(User.getInstance().getAccounts());
+                menuPasswordGenActionPerformed(evt);
+            }
+        });
+        menuEdit.add(menuPasswordGen);
+
         jMenuBar1.add(menuEdit);
 
         setJMenuBar(jMenuBar1);
@@ -296,6 +308,13 @@ public final class mainView extends javax.swing.JFrame {
         AccountFrame accountFrame = new AccountFrame(this, desktopPane);
         desktopPane.add(accountFrame);
         accountFrame.setVisible(true);
+
+    }
+
+    private void menuPasswordGenActionPerformed(java.awt.event.ActionEvent evt) {
+        PasswordGenPopup passwordGen = new PasswordGenPopup(this, desktopPane);
+        desktopPane.add(passwordGen);
+        passwordGen.setVisible(true);
 
     }
 
@@ -375,6 +394,7 @@ public final class mainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuDeleteEntry;
     private javax.swing.JMenuItem menuFindEntry;
     private javax.swing.JMenuItem menuViewEntries;
+    private javax.swing.JMenuItem menuPasswordGen;
     private javax.swing.JMenuItem menuMaster2;
     private javax.swing.JLabel txtLoginAs;
     private javax.swing.JLabel userLabel;

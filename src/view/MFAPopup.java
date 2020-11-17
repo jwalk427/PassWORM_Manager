@@ -21,6 +21,31 @@ import java.time.Instant;
 
 
 import model.AccountMap;
+import model.User;
+
+// Java code for thread creation by extending 
+// the Thread class 
+class Multithreading extends Thread 
+{ 
+    private String code = "";
+    public Multithreading(String newCode) {
+        super();
+        code = newCode;
+    }
+
+    public void run() 
+    { 
+        try
+        { 
+            MFA.sendEmail(code, User.getInstance().getEmail());
+        } 
+        catch (Exception e) 
+        { 
+            // Throwing an exception 
+            System.out.println ("Exception is caught"); 
+        } 
+    } 
+} 
 
 /**
  *
@@ -47,7 +72,8 @@ public class MFAPopup extends javax.swing.JDialog {
         //time is set to current time plus 3 minutes
         time = Instant.now().getEpochSecond() + 180;
         code = MFA.generateCode();
-        MFA.sendEmail(code, userEmail);
+        Multithreading item = new Multithreading(code); 
+        item.start(); 
     }
 
     /**
@@ -117,6 +143,10 @@ public class MFAPopup extends javax.swing.JDialog {
         this.dispose();
     }
 
+    public void setCode(String newCode) {
+        code = newCode;
+    }
+
     private void btnEnterActionPerformed(java.awt.event.ActionEvent evt) {
         authenticate();
 
@@ -129,10 +159,10 @@ public class MFAPopup extends javax.swing.JDialog {
             mainViews.getUserLabel().setText(usertxt);
             this.dispose();
             } else {
-            System.out.print("Incorrect code");
+            JOptionPane.showMessageDialog(null, "Error: Incorrect code");
             }
         } else {
-            System.out.println("Error: Code timed out");
+            JOptionPane.showMessageDialog(null, "Error: Code timed out");
         }
     }
 
