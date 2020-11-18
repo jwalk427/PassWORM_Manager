@@ -35,7 +35,7 @@ public class PasswordGenPopup extends javax.swing.JInternalFrame {
         boolean hasNumber = checkHasNumber.isSelected();
         boolean hasSpecial = checkHasSpecial.isSelected();
         
-        PasswordGenerator generator = new PasswordGenerator(length, hasUpper, hasNumber, hasSpecial);
+        PasswordGenerator generator = new PasswordGenerator(length, hasUpper, hasSpecial, hasNumber);
         txtPassword.setText(generator.generatePassword());
     }
     /**
