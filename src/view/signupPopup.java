@@ -23,10 +23,10 @@ public class signupPopup extends javax.swing.JDialog {
         this.mainViews = mainViews;
         initComponents();        
         setLocationRelativeTo(null);
-        txtUsername.setText("username");
-        txtEmail.setText("email");
-        txtPassword.setText("password");
-        txtConfirm.setText("password");
+        txtUsername.setText("");
+        txtEmail.setText("");
+        txtPassword.setText("");
+        txtConfirm.setText("");
     }
 
     private void signedUp()  {

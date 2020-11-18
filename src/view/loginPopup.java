@@ -21,8 +21,8 @@ public class loginPopup extends javax.swing.JDialog {
         this.mainViews = mainViews;
         initComponents();        
         setLocationRelativeTo(null);
-        txtUsername.setText("username");
-        txtPassword.setText("password");
+        txtUsername.setText("");
+        txtPassword.setText("");
     }
 
     private void loggedIn(){
