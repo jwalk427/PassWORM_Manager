@@ -63,7 +63,7 @@ public final class mainView extends javax.swing.JFrame {
     //Do not show signup if user has an account
     public void isSignup(boolean b){
         menuSignup.setEnabled(!b);
-        menuLogin.setEnabled(b);
+        menuLogin.setEnabled(true);
         menuLogout.setEnabled(false);
         menuChangePassword.setEnabled(b);
         menuAddEntry.setEnabled(false);
@@ -74,11 +74,11 @@ public final class mainView extends javax.swing.JFrame {
         menuMaster2.setEnabled(b);
 
         if (!b) {
-            txtLoginAs.setText("you must sign up first.");
+            txtLoginAs.setText("you must log in or sign up first.");
             userLabel.setText("");
         } 
         else{
-            txtLoginAs.setText("you must login first.");
+            txtLoginAs.setText("you must log in first.");
             userLabel.setText("");
         }
     }
@@ -99,7 +99,7 @@ public final class mainView extends javax.swing.JFrame {
         if (b) {
             txtLoginAs.setText("logged in as : ");  
         } else {
-            txtLoginAs.setText("you must login first.");
+            txtLoginAs.setText("you must log in first.");
             userLabel.setText("");
             if (this.model.isModified()) {
                 try {

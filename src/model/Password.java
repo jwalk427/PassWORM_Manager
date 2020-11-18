@@ -55,6 +55,22 @@ public class Password implements Serializable {
         }
         return decrypted;
     }
+    
+    public SecretKey getSecretKey() {
+    	return this.secretKey;
+    }
+    
+    public void setSecretKey(SecretKey key) {
+    	this.secretKey = key;
+    }
+    
+    public byte[] getPword() {
+    	return this.pword;
+    }
+    
+    public void setPword(byte[] pass) {
+    	this.pword = pass;
+    }
 
     /*Main class for testing and debugging*/
     // public static void main(String[] args)  

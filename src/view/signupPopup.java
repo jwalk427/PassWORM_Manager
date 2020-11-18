@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import model.User;
+import view.helper.FileHelper;
 import data.DocumentRepository;
 
 /**
@@ -53,10 +54,13 @@ public class signupPopup extends javax.swing.JDialog {
         } else{
             //Create the user with info provided
             User.User(usertxt, emailtxt, passtxt);
+            String fileName = usertxt + ".xml";
+            this.mainViews.getModel().setUser(User.getInstance());
+            this.mainViews.getModel().setFileName(fileName);
             try {
-                DocumentRepository.newInstance(usertxt + ".xml").writeDocument(User.getInstance());
+            	FileHelper.saveFile(this.mainViews, fileName);
             } catch (Exception e) {
-                System.err.println(e.getMessage());
+            	System.err.println(e.getMessage());
             }
             mainViews.isSignup(true);
             this.dispose();

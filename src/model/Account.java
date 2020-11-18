@@ -23,9 +23,29 @@ public class Account implements Serializable {
     public String getUsername(){
         return username;
     }
+    
+    public void setUsername(String uName) {
+    	this.username = uName;
+    }
 
     public String getUrl(){
         return url;
+    }
+    
+    public void setUrl(String address) {
+    	this.url = address;
+    }
+    
+    public Password getPword() {
+    	return this.pword;
+    }
+    
+    public void setPword(Password pass) {
+    	this.pword = pass;
+    }
+    
+    public void setNotes(String note) {
+    	this.notes = note;
     }
 
     public String getPassword(){

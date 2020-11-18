@@ -10,8 +10,8 @@ public class User implements Serializable {
     private static User userInstance = null;
     private String userName;
     private String email;
-    private Password pword;
-    private AccountMap acctMap;
+    private Password password;
+    private AccountMap accounts;
     
     public static User User(String Username, String Email, String password) 
     { 
@@ -38,11 +38,11 @@ public class User implements Serializable {
         return userInstance;
     } 
 
-    private User(String Username, String Email, String password, AccountMap map) {
+    public User(String Username, String Email, String pword, AccountMap map) {
         userName = Username;
         email = Email;
-        pword = new Password(password);
-        acctMap = map;
+        password = new Password(pword);
+        accounts = map;
     }
 
     // public User() {
@@ -59,33 +59,49 @@ public class User implements Serializable {
     public String getEmail(){
         return email;
     }
+    
+    public void setUserName(String uName) {
+    	userName = uName;
+    }
+    
+    public void setEmail(String address) {
+    	email = address;
+    }
 
     public boolean confirmPassword(String pass){
-        return pass.equals(pword.decrypt());
+        return pass.equals(password.decrypt());
     }
 
     public void changePassword(String pass){
-        pword = new Password(pass);
+        password = new Password(pass);
     }
 
     public void addAccount(String title, String username, String url, String password, String notes) {
-        acctMap.addAccount(title, username, url, password, notes);
+        accounts.addAccount(title, username, url, password, notes);
     }
 
     public void removeAccount(String website){
-        acctMap.removeAccount(website);
+        accounts.removeAccount(website);
     }
 
     public void changeAccount(String title, String username, String url, String password, String notes) {
-        acctMap.changeAccount(title, username, url, password, notes);
+        accounts.changeAccount(title, username, url, password, notes);
     }
 
     public void printAccounts() {
-        acctMap.printAccounts();
+        accounts.printAccounts();
     }
 
     public AccountMap getAccounts(){
-        return acctMap;
+        return accounts;
+    }
+    
+    public Password getPassword() {
+    	return password;
+    }
+    
+    public void setPassword(Password pword) {
+    	password = pword;
     }
 
     /*Main class for testing/Debugging*/

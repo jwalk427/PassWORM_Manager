@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<User>
+  <userName>username</userName>
+  <email>email@a.c</email>
+  <password>
+    <secretKey>
+      <algorithm>AES</algorithm>
+      <format>RAW</format>
+      <encoded>FutezlF1w31QdLoQr3kCuKkgzwzPRuPSKpSYsHm3mYg=</encoded>
+      <destroyed>false</destroyed>
+    </secretKey>
+    <pword>QI+b7advenhxhHtWqiTQXg==</pword>
+  </password>
+  <accounts>
+    <acctMap/>
+  </accounts>
+</User>

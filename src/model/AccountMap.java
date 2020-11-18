@@ -17,6 +17,14 @@ public class AccountMap implements Serializable {
     public AccountMap() {
         acctMap = new HashMap<String, Account>();
     }
+    
+    public void setAcctMap(HashMap<String, Account> map) {
+    	this.acctMap = map;
+    }
+    
+    public HashMap<String, Account> getAcctMap() {
+    	return this.acctMap;
+    }
 /*Should I return booleans to let the user know
 if these methods are successful?*/
     public void addAccount(String title, String username, String url, String password, String notes){
